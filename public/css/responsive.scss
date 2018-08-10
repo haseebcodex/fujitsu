@@ -1,0 +1,77 @@
+@media screen and (max-width:1024px) {
+    .formRow {
+        .placeholder {
+            font-size: 14px;
+        }
+    }
+}
+
+@media screen and (max-width:768px) {
+    .formRow {
+        .placeholder {
+            font-size: 14px;
+        }
+    }
+}
+
+@media screen and (max-width:375px) {
+    .formRow {
+        .placeholder {
+            font-size: 10px;
+        }
+    }
+}
+
+@media screen and (max-width:425px) {
+    .custom-fluid-catgry {
+        .custom-fluid-row-catgry {
+            .custom-fluid-row-col-catgry {
+                form {
+                    width: 100%;
+                    margin-left: auto;
+                    margin-right: auto;
+                }
+            }
+        }
+    }
+    .formRow {
+        &--input {
+            &.active {
+                .placeholder {
+                    font-size: 13px;
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width:350px) {
+    .formRow {
+        &--input-wrapper {
+            &.active {
+                .placeholder {
+                    font-size: 8px !important;
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width:1023px) {
+    .container-fluid-choose-logo {
+        .row-choose-logo {
+            .col-lg-3.col-md-3.col-sm-3.col-xs-12 {
+                .row {
+                    &.btn-show-hide {
+                        .col-lg-6.col-md-6.col-sm-6.col-xs-6 {
+                            input[type="button"] {
+                                font-size: 11px;
+                                padding: 5px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

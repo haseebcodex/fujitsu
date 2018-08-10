@@ -1,0 +1,188 @@
+<link rel="stylesheet" type="text/css" href="../public/jquery-ui-1.12.1.custom/jquery-ui.min.css">
+<style>
+    .numberField.error{
+        border: 1px red solid;
+    }
+</style>
+
+    <form name="addsvg" id="addsvg">
+        <table align="center" border="0" width="800" cellpadding="10" style="margin-top: 20vh;">
+            <tr>
+                <td align="right"><strong>Complete Svg Code:</strong></td>
+                <td align="left"><textarea placeholder="Svg code here" id="mainsvgcode" style="width: 300px; height: 100px;"></textarea></td>
+                <td align="left">Company <strong>Left:</strong> <input type="text" class="numberField" id="logoleftvalue" /> px</td>
+                <td align="left">Company <strong>Top:</strong> <input type="text" class="numberField" id="logotopvalue" /> px</td>
+                <td align="left">Slogan <strong>Left:</strong> <input type="text" class="numberField" id="sloganleftvalue" /> px</td>
+                <td align="left">Slogan <strong>Top:</strong> <input type="text" class="numberField" id="slogantopvalue" /> px</td>
+            </tr>
+            <tr>
+                <td align="right"><strong>Icon Svg Code:</strong></td>
+                <td align="left"><textarea placeholder="Icon svg code here" id="iconsvgcode" style="width: 300px; height: 100px;"></textarea></td>
+                <td align="left">Icon <strong>Left:</strong> <input type="text" class="numberField" id="iconleftvalue" /> px</td>
+                <td align="left">Icon <strong>Top:</strong> <input type="text" class="numberField" id="icontopvalue" /> px</td>
+                <td align="left">Icon <strong>Width:</strong> <input type="text" class="numberField" id="iconwidthvalue" /> px</td>
+                <td align="left">Icon <strong>Height:</strong> <input type="text" class="numberField" id="iconheightvalue" /> px</td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    select category:
+                    <select id="selectCategory">
+
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="6" align="right"><input style="width: 200px; height: 50px; font-size: 16px;" id="addIcon" type="button" value="Add Icon" /></td>
+            </tr>
+        </table>
+        <p class="required_error" style="color: red; display: none;">All fields are required.</p>
+        <p class="type_error" style="color: red; display: none;">mentioned fields should be number.</p>
+    </form>
+
+
+<script type="text/javascript" src="../public/js/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="../public/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
+
+
+<script>
+    $(document).ready(function(){
+
+        $.ajax({
+            type:'POST',
+            url:'getCat.php',
+            dataType: "json",
+            data:{selection:true},
+            success:function(data){
+                for(var i = 0; i < data[0].length; i++){
+                    if(i == 0){
+                        $('#selectCategory').append('<option value="'+ data[0][i] +'" selected>'+ data[1][i] +'</option>');
+                    }
+                    else{
+                        $('#selectCategory').append('<option value="'+ data[0][i] +'">'+ data[1][i] +'</option>');
+                    }
+                }
+            },
+            error: function(error){
+                console.log(error);
+            }
+        });
+
+        $('#addIcon').on('click',function(){
+            
+            if(!$('#logoleftvalue').val().length || !$('#logotopvalue').val().length || !$('#sloganleftvalue').val().length || !$('#slogantopvalue').val().length || !$('#mainsvgcode').val().length || !$('#iconleftvalue').val().length || !$('#icontopvalue').val().length || !$('#iconwidthvalue').val().length || !$('#iconheightvalue').val().length || !$('#iconsvgcode').val().length)
+            {
+                $('.required_error').css('display', 'block');
+            }
+            else{
+                $('.numberField').each(function(){
+                    var check = validateNumber('#'+$(this).attr('id'));
+                    if(!check){
+                        $(this).addClass('error');
+                    }
+                    else{
+                        $(this).removeClass('error');
+                    }
+                })
+                $('.required_error').css('display', 'none');
+                
+                if(checkError()){
+
+                    var svgObject = developSvgObject();
+                    var catId = parseInt($('#selectCategory').val());
+
+                    $.ajax({
+                        type:'POST',
+                        url:'insert_svg.php',
+                        dataType: "json",
+                        data:{addsvgs: true, svgs: svgObject, svgcat: catId},
+                        success: function(data){
+
+                            alert(data);
+                            console.log(data)
+                            // window.location.reload();
+
+                        },
+                        error: function(error){
+                            console.log(error);
+                            if(error.status == 200){
+                                alert(error.responseText);
+                                // window.location.reload();
+                            }
+                            else{
+                                alert(error.responseText);
+                            }
+                        }
+                    });
+
+                }
+
+            }
+            
+        });
+    })
+
+    function validateNumber(id){
+        var reg = /^\d+$/;
+        if($(id).val().match(reg)){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+    function checkError(){
+        var checkhere = true;
+        $('.numberField').each(function(){
+            if($(this).hasClass('error')){
+                checkhere =  false;
+            }
+        })
+
+        if(checkhere){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+    function developSvgObject(){
+
+        var fullsvg = $('#mainsvgcode').val().replace(/"/g, 'osamaShakir');
+        var iconsvg = $('#iconsvgcode').val().replace(/"/g, 'osamaShakir');;
+
+        var svgCode = {
+            svg : {
+                value : fullsvg,
+                company : {
+                    position : {
+                        left : $('#logoleftvalue').val(),
+                        top : $('#logotopvalue').val()
+                    }
+                },
+                slogan : {
+                    position : {
+                        left : $('#sloganleftvalue').val(),
+                        top : $('#slogantopvalue').val()
+                    }
+                }
+            },
+            icon : {
+                value : iconsvg,
+                position : {
+                    left : $('#iconleftvalue').val(),
+                    top : $('#icontopvalue').val()
+                },
+                size : {
+                    width : $('#iconwidthvalue').val(),
+                    height : $('#iconheightvalue').val()
+                }
+            }
+        };
+
+        return JSON.stringify(svgCode);
+
+    }
+
+</script>

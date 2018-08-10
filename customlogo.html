@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <link rel="stylesheet" type="text/css" href="public/jquery-ui-1.12.1.custom/jquery-ui.min.css">
+    <link rel="stylesheet" type="text/css" href="public/css/colorpicker.css">
+
+    <link href="https://fonts.googleapis.com/css?family=Eczar|Hanalei+Fill|Indie+Flower|Josefin+Sans|Kirang+Haerang|Modern+Antiqua|Montserrat|Sunflower:300|Ubuntu|Work+Sans" rel="stylesheet">
+
+    <style type="text/css">
+        body, html{
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+        #draggableParent{
+            width: calc(800px - 10px);
+            height: calc(800px - 10px);
+            /*background: url(public/images/gridImage.png) center repeat;*/
+            margin: 10vh auto;
+            border: 3px #000 solid;
+            overflow: hidden;
+            position: relative;
+        }
+        .logoNameHere,
+        .sloganNameHere{
+            display: inline-block;
+            position: absolute;
+        }
+        .editPallet{
+            position: fixed;
+            right: 50px;
+            top: 50px;
+            background: #eaeaea;
+            min-width: 200px;
+            min-height: 200px;
+            padding: 10px;
+            display: none;
+        }
+
+        .ui-resizable-handle{
+            background: #333;
+        }
+
+        .ui-draggable-handle{
+            cursor: -webkit-grab;
+        }
+        .ui-icon{
+            width: 9px;
+            height: 9px;
+            right: -5px;
+            bottom: -5px;
+        }
+
+        .ui-rotatable-handle {
+            height: 16px;
+            width: 16px;
+            cursor: pointer;
+            /*background-image: url(rotate.png);*/
+            background-size: 100%;
+            background: #ccc;
+            left: 2px;
+            bottom: 2px;
+        }
+
+        svg path{
+            cursor: pointer;
+        }
+
+    </style>
+
+</head>
+<body ng-app="logomakerapp">
+
+    <div ng-controller="logoMakerController" ng-init="init()">
+
+        <div id="draggableParent">
+            
+            <div id="svgIconHere" style="width: {{svg.size.width}}; height: {{svg.size.height}}; left: {{svg.position.left}}; top: {{svg.position.top}}; transform: rotate({{svg.rotate.rad}});"></div>
+
+            <div id="logoNameHere" class="logoNameHere" style="font-family: {{logoName.family}}; font-size: {{logoName.size}}; font-weight: {{logoName.weight}}; font-style: {{logoName.style}}; color: {{logoName.color}}; left: {{logoName.position.left}}; top: {{logoName.position.top}};">{{logoName.name}}</div>
+
+            <div id="sloganNameHere" class="sloganNameHere" style="font-family: {{slogan.family}}; font-size: {{slogan.size}}; font-weight: {{slogan.weight}}; font-style: {{slogan.style}}; color: {{slogan.color}};; left: {{slogan.position.left}}; top: {{slogan.position.top}};">{{slogan.name}}</div>
+
+        </div>
+
+        <div class="editPallet" id="logoNameSettings">
+
+            <p>Logo Name Settings</p>
+            <input type="text" name="logoName" id="logoName" ng-model="logoName.name" placeholder="logoname" /><br />
+            <input colorpicker="rgba" colorpicker-position="left" ng-model="logoName.color" type="text"><br />
+            <select ng-model="logoName.style">
+                <option value="normal">Normal</option>
+                <option value="italic">Italic</option>
+            </select><br />
+            <select ng-model="logoName.weight">
+                <option value="100">100</option>
+                <option value="200">200</option>
+                <option value="400">400</option>
+                <option value="bold">bold</option>
+                <option value="bolder">bolder</option>
+            </select><br />
+            <input type="text" ng-model="logoName.size" /><br/>
+            <select ng-model="logoName.family">
+                <option ng-repeat="family in fontFamilies" value="{{family.name}}">{{family.name}}</option>
+            </select>
+
+        </div>
+
+        <div class="editPallet" id="sloganSettings">
+
+            <p>Slogan Settings</p>
+            <input type="text" name="slogan" id="slogan" ng-model="slogan.name" placeholder="slogan" /><br />
+            <input colorpicker="rgba" colorpicker-position="left" ng-model="slogan.color" type="text"><br />
+            <select ng-model="slogan.style">
+                <option value="normal">Normal</option>
+                <option value="italic">Italic</option>
+            </select><br />
+            <select ng-model="slogan.weight">
+                <option value="100">100</option>
+                <option value="200">200</option>
+                <option value="400">400</option>
+                <option value="bold">bold</option>
+                <option value="bolder">bolder</option>
+            </select><br />
+            <input type="text" ng-model="slogan.size" /><br/>
+            <select ng-model="slogan.family">
+                <option ng-repeat="family in fontFamilies" value="{{family.name}}">{{family.name}}</option>
+            </select>
+
+        </div>
+
+        <div class="editPallet" id="iconSettings">
+            <p>Icon Settings</p>
+            <input ng-repeat="path in svg.paths"
+                id="input_{{path.id}}" colorpicker="rgba" colorpicker-position="left" ng-model="path.fill" ng-change="updateFillColor(path.id)" type="text"><br />
+        </div>
+    </div>
+
+</body>
+
+
+    <script src="public/js/angular.min.js"></script>
+    <!-- <script src="public/js/angular-route.js"></script> -->
+    <script src="public/js/logoMakerApp.js"></script>
+    <script src="public/js/getStartedController.js"></script>
+    <script src="public/js/logosController.js"></script>
+    <script src="public/js/logoMakerController.js"></script>
+
+    <script type="text/javascript" src="public/js/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="public/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="public/js/jquery.ui.rotatable.js"></script>
+    <script src="public/js/bootstrap-colorpicker-module.js"></script>
+
+</html>
