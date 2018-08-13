@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <link rel="stylesheet" type="text/css" href="public/jquery-ui-1.12.1.custom/jquery-ui.min.css">
     <link rel="stylesheet" type="text/css" href="public/css/colorpicker.css">
@@ -15,19 +16,29 @@
 
 
 </head>
+
 <body ng-app="logomakerapp">
 
     <div ng-controller="getStartedController" ng-init="init()">
-        
+
         <div class="container-fluid custom-fluid">
 
             <div class="row custom-fluid-row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 custom-fluid-row-col">
-                    <h1 class="text-center">Make a logo you'll be proud of.</h1>
-                    <p class="text-center p-tagline">Use our logo maker to instantly create stunning logo designs for your business.</p>
-                    <h3 class="text-center" ng-if="step > 1">Company Name: <strong style="color: #006aec;">{{companyName}}</strong></h3>
-                    <h3 class="text-center" ng-if="step == 3">Slogan: <strong style="color: #006aec;">{{sloganName}}</strong></h3>
-                    <div class="wrapper">
+                    <h1 class="text-center slide-in-blurred-left-h1">Make a logo you'll be proud of.</h1>
+                    <p class="text-center p-tagline slide-in-blurred-right-p">Use our logo maker to instantly create stunning logo designs for your business.</p>
+                    <div class="center-block nameSlogan slide-in-blurred-left-h1" ng-if="step > 1">
+
+                        <h3 class="text-center">Company Name: <strong style="color: #8554fa">{{companyName}}</strong></h3>
+
+                        <br>
+
+                        <h3 class="text-center slide-in-blurred-right-p" ng-if="step == 3">Slogan: <strong style="color: #8554fa">{{sloganName}}</strong></h3>
+
+
+
+                    </div>
+                    <div class="wrapper focus-in-contract-bck-input" id="Anim">
 
                         <fieldset class="formRow">
                             <div class="formRow--item" ng-show="step == 1">
@@ -46,20 +57,20 @@
                         <input type="button" ng-if="step == 1" value="Next" ng-click="checkCompanyName()">
                         <input type="button" ng-if="step == 2" value="Next" ng-click="checkSloganName()">
                     </div>
-                    <span class="required_error text-center" ng-if="requiredCompanyName">Company name is required.</span>
-                    <span class="required_error text-center" ng-if="requiredSloganName">Slogan is required.</span>
+                    <span class="required_error text-center slide-in-blurred-left-h1" ng-if="requiredCompanyName">Company name is required.</span>
+                    <span class="required_error text-center slide-in-blurred-left-h1" ng-if="requiredSloganName">Slogan is required.</span>
 
-                    <form class="categoryForm" action="" ng-show="step == 3">
+                    <form class="categoryForm" action="" ng-show="step == 3" id="Anim1">
                         <!-- <div class="lds-ring" ng-if="showCategoryLoader"><div></div><div></div><div></div><div></div></div> -->
                         Select Category
-                        <select class="js-example-basic-multiple js-select2" name="states[]" >
+                        <select class="js-example-basic-multiple js-select2" name="states[]">
                             <option ng-repeat="cat in categories" value="{{cat.value}}">{{cat.value}}</option>
                         </select>
                         <input class="center-block" type="button" value="Get Started" ng-click="checkCategories()">
                     </form>
                     <span class="required_error text-center" ng-if="requiredCategory">Category is required.</span>
 
-                    <div class="watch-video">
+                    <div class="watch-video slide-in-bottom-video">
                         <i class="fab fa-youtube"></i>
                         <a href="">
                             <p>Watch the video</p>
@@ -75,20 +86,20 @@
 </body>
 
 
-    <script src="public/js/angular.min.js"></script>
-    <!-- <script src="public/js/angular-route.js"></script> -->
-    <script src="public/js/logoMakerApp.js"></script>
-    <script src="public/js/getStartedController.js"></script>
-    <script src="public/js/logosController.js"></script>
-    <script src="public/js/logoMakerController.js"></script>
+<script src="public/js/angular.min.js"></script>
+<!-- <script src="public/js/angular-route.js"></script> -->
+<script src="public/js/logoMakerApp.js"></script>
+<script src="public/js/getStartedController.js"></script>
+<script src="public/js/logosController.js"></script>
+<script src="public/js/logoMakerController.js"></script>
 
-    <script type="text/javascript" src="public/js/jquery-3.3.1.min.js"></script>
-    <script type="text/javascript" src="public/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
-    <script type="text/javascript" src="public/js/jquery.ui.rotatable.js"></script>
-    <script src="public/js/bootstrap-colorpicker-module.js"></script>
+<script type="text/javascript" src="public/js/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="public/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
+<script type="text/javascript" src="public/js/jquery.ui.rotatable.js"></script>
+<script src="public/js/bootstrap-colorpicker-module.js"></script>
 
-    <script src="public/js/select2.js"></script>
-    <script src="public/js/main.js"></script>
-    <script src="public/js/fontawesome.min.js"></script>
+<script src="public/js/select2.js"></script>
+<script src="public/js/main.js"></script>
+<script src="public/js/fontawesome.min.js"></script>
 
 </html>
