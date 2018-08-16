@@ -12,8 +12,8 @@
                 <td align="left"><textarea placeholder="Svg code here" id="mainsvgcode" style="width: 300px; height: 100px;"></textarea></td>
                 <td align="left">Company <strong>Left:</strong> <input type="text" class="numberField" id="logoleftvalue" /> px</td>
                 <td align="left">Company <strong>Top:</strong> <input type="text" class="numberField" id="logotopvalue" /> px</td>
-                <td align="left">Slogan <strong>Left:</strong> <input type="text" class="numberField" id="sloganleftvalue" /> px</td>
-                <td align="left">Slogan <strong>Top:</strong> <input type="text" class="numberField" id="slogantopvalue" /> px</td>
+                <!-- <td align="left">Slogan <strong>Left:</strong> <input type="text" class="numberField" id="sloganleftvalue" /> px</td>
+                <td align="left">Slogan <strong>Top:</strong> <input type="text" class="numberField" id="slogantopvalue" /> px</td> -->
             </tr>
             <tr>
                 <td align="right"><strong>Icon Svg Code:</strong></td>
@@ -69,7 +69,7 @@
 
         $('#addIcon').on('click',function(){
             
-            if(!$('#logoleftvalue').val().length || !$('#logotopvalue').val().length || !$('#sloganleftvalue').val().length || !$('#slogantopvalue').val().length || !$('#mainsvgcode').val().length || !$('#iconleftvalue').val().length || !$('#icontopvalue').val().length || !$('#iconwidthvalue').val().length || !$('#iconheightvalue').val().length || !$('#iconsvgcode').val().length)
+            if(!$('#logoleftvalue').val().length || !$('#logotopvalue').val().length || !$('#mainsvgcode').val().length || !$('#iconleftvalue').val().length || !$('#icontopvalue').val().length || !$('#iconwidthvalue').val().length || !$('#iconheightvalue').val().length || !$('#iconsvgcode').val().length)
             {
                 $('.required_error').css('display', 'block');
             }

@@ -2,13 +2,13 @@ angular.module('logos.controllers', []).controller('logosController', function (
 
     $scope.category = localStorage.getItem('categoryname');
     $scope.company = localStorage.getItem('companyname');
-    $scope.slogan = localStorage.getItem('sloganname');
+    // $scope.slogan = localStorage.getItem('sloganname');
     // $scope.namelist;
     // $scope.sloganlist;
 
     $scope.init = function () {
 
-        if(!$scope.category || !$scope.company || !$scope.slogan){
+        if(!$scope.category || !$scope.company){
             window.location.href = "start.html";
         }
         else{
@@ -45,7 +45,8 @@ angular.module('logos.controllers', []).controller('logosController', function (
             var data = data[i].replace(/osamaShakir/g, "'");
             data = JSON.parse(data);
             console.log(data);
-            var content = '<div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 text-center" logoleft="'+ data.svg.company.position.left +'" logotop="'+ data.svg.company.position.top +'" sloganleft="'+ data.svg.slogan.position.left +'" slogantop="'+ data.svg.slogan.position.top +'">'+
+            // var content = '<div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 text-center" logoleft="'+ data.svg.company.position.left +'" logotop="'+ data.svg.company.position.top +'" sloganleft="'+ data.svg.slogan.position.left +'" slogantop="'+ data.svg.slogan.position.top +'">'+
+            var content = '<div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 text-center" logoleft="'+ data.svg.company.position.left +'" logotop="'+ data.svg.company.position.top +'">'+
                 data.svg.value+
                 '<div class="onlyIconHere" iconleft="'+ data.icon.position.left +'" icontop="'+ data.icon.position.top +'" iconwidth="'+ data.icon.size.width +'" iconheight="'+ data.icon.size.height +'">'+
                 data.icon.value+
@@ -65,8 +66,8 @@ angular.module('logos.controllers', []).controller('logosController', function (
         
         $('.onlyIconHere').css('display','none'); //display none the icon with svgs
 
-        $('svg text[id="logoname"]').html($scope.company);
-        $('svg text[id="sloganname"]').html($scope.slogan);
+        $('svg text').html($scope.company);
+        // $('svg text[id="sloganname"]').html($scope.slogan);
 
         $('.col-md-6 input[type="button"]').on('click', function(){
             var val = $(this).attr('value');
@@ -74,29 +75,38 @@ angular.module('logos.controllers', []).controller('logosController', function (
 
                 var logoName = {
                     name : $scope.company,
-                    family : $(this).parents('.col-lg-3').find('text[id="logoname"]').css('font-family'),
-                    style : $(this).parents('.col-lg-3').find('text[id="logoname"]').css('font-style'),
-                    weight : $(this).parents('.col-lg-3').find('text[id="logoname"]').css('font-weight'),
-                    size : $(this).parents('.col-lg-3').find('text[id="logoname"]').css('font-size'),
-                    color : $(this).parents('.col-lg-3').find('text[id="logoname"]').css('fill'),
+                    // family : $(this).parents('.col-lg-3').find('text[id="logoname"]').css('font-family'),
+                    // style : $(this).parents('.col-lg-3').find('text[id="logoname"]').css('font-style'),
+                    // weight : $(this).parents('.col-lg-3').find('text[id="logoname"]').css('font-weight'),
+                    // size : $(this).parents('.col-lg-3').find('text[id="logoname"]').css('font-size'),
+                    // color : $(this).parents('.col-lg-3').find('text[id="logoname"]').css('fill'),
+                    family : $(this).parents('.col-lg-3').find('text').css('font-family'),
+                    style : $(this).parents('.col-lg-3').find('text').css('font-style'),
+                    weight : $(this).parents('.col-lg-3').find('text').css('font-weight'),
+                    size : $(this).parents('.col-lg-3').find('text').css('font-size'),
+                    color : $(this).parents('.col-lg-3').find('text').css('fill'),
                     position : {
                         left : $(this).parents('.col-lg-3').attr('logoleft') + 'px',
                         top : $(this).parents('.col-lg-3').attr('logotop') + 'px'
+                    },
+                    rotate : {
+                        degree : '0deg',
+                        rad : '0rad'
                     }
                 };
             
-                var slogan = {
-                    name : $scope.slogan,
-                    family : $(this).parents('.col-lg-3').find('text[id="sloganname"]').css('font-family'),
-                    style : $(this).parents('.col-lg-3').find('text[id="sloganname"]').css('font-style'),
-                    weight : $(this).parents('.col-lg-3').find('text[id="sloganname"]').css('font-weight'),
-                    size : $(this).parents('.col-lg-3').find('text[id="sloganname"]').css('font-size'),
-                    color : $(this).parents('.col-lg-3').find('text[id="sloganname"]').css('fill'),
-                    position : {
-                        left : $(this).parents('.col-lg-3').attr('sloganleft') + 'px',
-                        top : $(this).parents('.col-lg-3').attr('slogantop') + 'px'
-                    }
-                };
+                // var slogan = {
+                //     name : $scope.slogan,
+                //     family : $(this).parents('.col-lg-3').find('text[id="sloganname"]').css('font-family'),
+                //     style : $(this).parents('.col-lg-3').find('text[id="sloganname"]').css('font-style'),
+                //     weight : $(this).parents('.col-lg-3').find('text[id="sloganname"]').css('font-weight'),
+                //     size : $(this).parents('.col-lg-3').find('text[id="sloganname"]').css('font-size'),
+                //     color : $(this).parents('.col-lg-3').find('text[id="sloganname"]').css('fill'),
+                //     position : {
+                //         left : $(this).parents('.col-lg-3').attr('sloganleft') + 'px',
+                //         top : $(this).parents('.col-lg-3').attr('slogantop') + 'px'
+                //     }
+                // };
 
                 var svg = $(this).parents('.col-lg-3').find('.onlyIconHere > svg')[0].outerHTML;
                 var svgIcon = {
@@ -116,7 +126,8 @@ angular.module('logos.controllers', []).controller('logosController', function (
                     paths : []
                 };
 
-                $scope.sendSelectedSvg(svgIcon, logoName, slogan);
+                // $scope.sendSelectedSvg(svgIcon, logoName, slogan);
+                $scope.sendSelectedSvg(svgIcon, logoName);
                 
                 // console.log(svgIcon);
                 // console.log(logoName);
@@ -132,11 +143,12 @@ angular.module('logos.controllers', []).controller('logosController', function (
         // });
     };
 
-    $scope.sendSelectedSvg = function(svgIcon, logoName, slogan){
+    // $scope.sendSelectedSvg = function(svgIcon, logoName, slogan){
+    $scope.sendSelectedSvg = function(svgIcon, logoName){
         // console.log(svg);
         localStorage.setItem('selectedIcon', JSON.stringify(svgIcon));
         localStorage.setItem('selectedLogoName', JSON.stringify(logoName));
-        localStorage.setItem('selectedSloganName', JSON.stringify(slogan));
+        // localStorage.setItem('selectedSloganName', JSON.stringify(slogan));
         window.location.href = "customlogo.html";
     };
 

@@ -12,8 +12,29 @@ angular.module('logomaker.controllers', ['colorpicker.module']).controller('logo
     ];
 
     $scope.logoName = JSON.parse(localStorage.getItem('selectedLogoName'));
-    $scope.slogan = JSON.parse(localStorage.getItem('selectedSloganName'));
+    // $scope.slogan = JSON.parse(localStorage.getItem('selectedSloganName'));
     $scope.svg = JSON.parse(localStorage.getItem('selectedIcon'));
+    $scope.slogan = {
+        name : "slogan name here",
+        showSlogan : false,
+        family : "MyriadPro-Regular, \"Myriad Pro\"",
+        style : "normal",
+        weight : "400",
+        size : "35.92px",
+        color : "rgb(91, 237, 15)",
+        position : {
+            left : "0px",
+            top : "0px"
+        },
+        rotate : {
+            degree : '0deg',
+            rad : '0rad'
+        }
+    };
+    $scope.background = "#fff";
+    $scope.showlogosetting = true;
+    $scope.showslogansetting = false;
+    $scope.showiconetting = false;
 
     // $scope.logoName = {
     //     name : localStorage.getItem('companyname'),
@@ -25,19 +46,6 @@ angular.module('logomaker.controllers', ['colorpicker.module']).controller('logo
     //     position : {
     //         left : '200px',
     //         top : '410px'
-    //     }
-    // };
-
-    // $scope.slogan = {
-    //     name : localStorage.getItem('sloganname'),
-    //     family : $scope.fontFamilies[2].name,
-    //     style : 'italic',
-    //     weight : '400',
-    //     size : '40px',
-    //     color : "black",
-    //     position : {
-    //         left : '200px',
-    //         top : '480px'
     //     }
     // };
 
@@ -60,18 +68,13 @@ angular.module('logomaker.controllers', ['colorpicker.module']).controller('logo
 
     $scope.init = function(){
 
-        if(!localStorage.getItem('selectedLogoName') || !localStorage.getItem('selectedSloganName') || !localStorage.getItem('selectedIcon')){
+        // if(!localStorage.getItem('selectedLogoName') || !localStorage.getItem('selectedSloganName') || !localStorage.getItem('selectedIcon')){
+        if(!localStorage.getItem('selectedLogoName') || !localStorage.getItem('selectedIcon')){
             window.location.href = "start.html";
         }
         else{
             $scope.loadLogo();
         }
-
-        // $('#iconSettings input').on('click', function(){
-
-            
-
-        // })
 
     };
 
@@ -83,7 +86,7 @@ angular.module('logomaker.controllers', ['colorpicker.module']).controller('logo
         $('#svgIconHere').draggable({
             containment: "#draggableParent",
             start: function(event, ui){
-                $scope.initSettings(event, ui);
+                // $scope.initSettings(event, ui);
                 // console.log(ui);
             },
             stop: function(event, ui){
@@ -105,6 +108,7 @@ angular.module('logomaker.controllers', ['colorpicker.module']).controller('logo
                 console.log($scope.svg);
             }
         }).rotatable({
+            wheelRotate : false,
             // Callback fired on rotation start.
             start: function(event, ui) {
             },
@@ -124,23 +128,54 @@ angular.module('logomaker.controllers', ['colorpicker.module']).controller('logo
             // snap: true,
             // grid: [ 10, 10 ],
             start: function(event, ui){
-                $scope.initSettings(event, ui);
+                // $scope.initSettings(event, ui);
                 // console.log(ui);
             },
             stop: function(event, ui){
                 $scope.updatePosition(event, ui);
             }
+        }).rotatable({
+            wheelRotate : false,
+            // Callback fired on rotation start.
+            start: function(event, ui) {
+            },
+            // Callback fired during rotation.
+            rotate: function(event, ui) {
+            },
+            // Callback fired on rotation end.
+            stop: function(event, ui) {
+                $scope.updateRotate(event, ui);
+            }
         });
 
-        $('#logoNameHere, #sloganNameHere, #svgIconHere').on('click', function(){
-            $scope.setupSettings($(this).attr('id'));
-        });
+        $scope.initPlugins(); //initializes the tooltip
+
+        // $('#logoNameHere, #sloganNameHere, #svgIconHere').on('click', function(){
+        //     $scope.setupSettings($(this).attr('id'));
+        // });
 
     };
 
-    $scope.initSettings = function (event, ui){
-        var id = event.currentTarget.id;
-        $scope.setupSettings(id);
+    // $scope.initSettings = function (event, ui){
+    //     var id = event.currentTarget.id;
+    //     $scope.setupSettings(id);
+    // };
+
+    $scope.initPlugins = function(){
+        
+        $('.ui-rotatable-handle').attr('title', "rotate").addClass('tooltipster');
+        $('.ui-resizable-handle').attr('title', "resize").addClass('tooltipster');
+        
+        $('.tooltipster').tooltipster({
+            animation: 'fade',
+            delay: 0,
+            theme: 'tooltipster-borderless'
+        });
+
+        $(".js-select2").select2({
+            placeholder: "Choose Category"
+        });
+        
     };
 
     $scope.setupSettings = function (id){
@@ -171,6 +206,21 @@ angular.module('logomaker.controllers', ['colorpicker.module']).controller('logo
         else if(id == 'sloganNameHere'){
             $scope.slogan.position.left = ui.position.left + 'px';
             $scope.slogan.position.top = ui.position.top + 'px';
+            console.log($scope.slogan);
+        }
+    };
+
+    $scope.updateRotate = function (event, ui){
+        var id = event.target.id;
+
+        if(id == "logoNameHere"){
+            $scope.logoName.rotate.rad = ui.angle.current + 'rad';
+            $scope.logoName.rotate.degree = ui.angle.degrees + 'deg';
+            console.log($scope.logoName);
+        }
+        else if(id == 'sloganNameHere'){
+            $scope.slogan.rotate.rad = ui.angle.current + 'rad';
+            $scope.slogan.rotate.degree = ui.angle.degrees + 'deg';
             console.log($scope.slogan);
         }
     };
