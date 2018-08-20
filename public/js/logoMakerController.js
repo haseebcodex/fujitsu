@@ -20,7 +20,7 @@ angular.module('logomaker.controllers', ['colorpicker.module']).controller('logo
         family : "MyriadPro-Regular, \"Myriad Pro\"",
         style : "normal",
         weight : "400",
-        size : "35.92px",
+        size : "35",
         color : "rgb(91, 237, 15)",
         position : {
             left : "0px",
@@ -31,10 +31,13 @@ angular.module('logomaker.controllers', ['colorpicker.module']).controller('logo
             rad : '0rad'
         }
     };
-    $scope.background = "#fff";
-    $scope.showlogosetting = true;
-    $scope.showslogansetting = false;
-    $scope.showiconetting = false;
+    $scope.background = "#eaeaea";
+    $scope.editStep = -1;
+    $scope.editHistory = [];
+    $scope.completeLogo = {};
+    // $scope.showlogosetting = true;
+    // $scope.showslogansetting = false;
+    // $scope.showiconsetting = false;
 
     // $scope.logoName = {
     //     name : localStorage.getItem('companyname'),
@@ -92,7 +95,8 @@ angular.module('logomaker.controllers', ['colorpicker.module']).controller('logo
             stop: function(event, ui){
                 $scope.svg.position.left = ui.position.left + 'px';
                 $scope.svg.position.top = ui.position.top + 'px';
-                console.log($scope.svg);
+                $scope.updateHistory();
+                // console.log($scope.svg);
             }
             // snap: true,
             // grid: [ 10, 10 ]
@@ -105,7 +109,8 @@ angular.module('logomaker.controllers', ['colorpicker.module']).controller('logo
             stop: function(event, ui){
                 $scope.svg.size.width = ui.size.width + 'px';
                 $scope.svg.size.height = ui.size.height + 'px';
-                console.log($scope.svg);
+                $scope.updateHistory();
+                // console.log($scope.svg);
             }
         }).rotatable({
             wheelRotate : false,
@@ -119,7 +124,8 @@ angular.module('logomaker.controllers', ['colorpicker.module']).controller('logo
             stop: function(event, ui) {
                 $scope.svg.rotate.rad = ui.angle.current + 'rad';
                 $scope.svg.rotate.degree = ui.angle.degrees + 'deg';
-                console.log($scope.svg);
+                $scope.updateHistory();
+                // console.log($scope.svg);
             }
         });
 
@@ -133,6 +139,7 @@ angular.module('logomaker.controllers', ['colorpicker.module']).controller('logo
             },
             stop: function(event, ui){
                 $scope.updatePosition(event, ui);
+                $scope.updateHistory();
             }
         }).rotatable({
             wheelRotate : false,
@@ -145,6 +152,7 @@ angular.module('logomaker.controllers', ['colorpicker.module']).controller('logo
             // Callback fired on rotation end.
             stop: function(event, ui) {
                 $scope.updateRotate(event, ui);
+                $scope.updateHistory();
             }
         });
 
@@ -165,15 +173,12 @@ angular.module('logomaker.controllers', ['colorpicker.module']).controller('logo
         
         $('.ui-rotatable-handle').attr('title', "rotate").addClass('tooltipster');
         $('.ui-resizable-handle').attr('title', "resize").addClass('tooltipster');
+        $('.switchery').attr('title', "Add Text").addClass('tooltipster');
         
         $('.tooltipster').tooltipster({
             animation: 'fade',
             delay: 0,
             theme: 'tooltipster-borderless'
-        });
-
-        $(".js-select2").select2({
-            placeholder: "Choose Category"
         });
         
     };
@@ -233,6 +238,9 @@ angular.module('logomaker.controllers', ['colorpicker.module']).controller('logo
         $('#svgIconHere svg path, #svgIconHere svg rect, #svgIconHere svg polygon, #svgIconHere svg circle, #svgIconHere svg ellipse').each(function(index){
             $(this).attr('id', 'vector_id_' + index).attr('pathid', index);
             var fillcolor = $(this).css('fill');
+            if(fillcolor.indexOf('linear-gradient')){
+                fillcolor = '';
+            }
             var path_here = { id : 'vector_id_' + index, fill : fillcolor };
             $scope.svg.paths.push(path_here);
         }).on('click', function(e){
@@ -243,9 +251,9 @@ angular.module('logomaker.controllers', ['colorpicker.module']).controller('logo
             var pathId = $('#' + $(this).attr('id')).attr('pathid');
 
             for(var i in $scope.svg.paths) {
-                $('#input_' + $scope.svg.paths[i].id).css('display', 'none');
+                $('#input_' + $scope.svg.paths[i].id + ' input').css('border-bottom', '1px #5d5d5d solid');
             }
-            $('#input_' + $scope.svg.paths[pathId].id).css('display', 'block');
+            $('#input_' + $scope.svg.paths[pathId].id + ' input').css('border-bottom', '2px #ff3203 solid');
 
         });
 
@@ -255,6 +263,49 @@ angular.module('logomaker.controllers', ['colorpicker.module']).controller('logo
         console.log(id);
         var onlyId = $('#' + id).attr('pathid');
         $('#' + id).css('fill', $scope.svg.paths[onlyId].fill);
+    };
+
+    $scope.updateHistory = function(){
+        $scope.editStep++;
+        var update = {
+            svg : $scope.svg,
+            logoname : $scope.logoName,
+            slogan : $scope.slogan
+        };
+        if($scope.editStep < $scope.editHistory.length){
+            $scope.editHistory.length = $scope.editStep;
+        }
+        $scope.editHistory.push(JSON.stringify(update));
+        console.log($scope.editHistory);
+    };
+
+    $scope.undoredo = function(check){
+            if(check == 'undo'){
+                if($scope.editStep > 0){
+                    $scope.editStep--;
+                    // var undoValue = parseInt($('#draggableParent').attr('undo'));
+                    var newsvg = JSON.parse($scope.editHistory[$scope.editStep]);
+                    $scope.svg = newsvg.svg;
+                    $scope.logoName = newsvg.logoname;
+                    $scope.slogan = newsvg.slogan;
+                    // $('#draggableParent').attr('undo', undoValue+1);
+                }
+            }
+            else{
+                if($scope.editStep < $scope.editHistory.length-1){
+                    $scope.editStep++;
+                    // var undoValue = parseInt($('#draggableParent').attr('undo'));
+                    var newsvg = JSON.parse($scope.editHistory[$scope.editStep]);
+                    $scope.svg = newsvg.svg;
+                    $scope.logoName = newsvg.logoname;
+                    $scope.slogan = newsvg.slogan;
+                    // $('#draggableParent').attr('undo', undoValue+1);
+                }
+            }
+        // $scope.svg.position.left = "0px"
+    };
+    
+    $scope.finish = function(){
     };
 
 });

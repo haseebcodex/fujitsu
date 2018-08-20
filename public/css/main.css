@@ -715,12 +715,13 @@ body {
     transform: translateY(0);
     opacity: 1; } }
 body.editorBody {
-  background: #eaeaea; }
+  background: #dadada; }
   body.editorBody .navbar {
-    background: #fff;
+    background: #333;
     padding: 8px;
     box-shadow: 0px -3px 50px -15px #333;
     position: fixed;
+    border-radius: 0;
     top: 0;
     left: 0;
     width: 100%;
@@ -746,7 +747,8 @@ body.editorBody {
     body.editorBody .main-container .row .col-md-8 {
       height: calc(100vh - 68px); }
     body.editorBody .main-container .row .col-md-4 {
-      background: #fff; }
+      background: #fff;
+      overflow: auto; }
   body.editorBody #draggableParent {
     width: calc(800px - 10px);
     height: calc(800px - 10px);
@@ -755,80 +757,147 @@ body.editorBody {
     border: 1px #ccc dashed;
     overflow: hidden;
     position: relative; }
+    body.editorBody #draggableParent .controls {
+      position: absolute;
+      right: 0;
+      top: 0;
+      background: #fff;
+      padding: 10px; }
+      body.editorBody #draggableParent .controls i {
+        cursor: pointer;
+        padding: 0;
+        width: 40px;
+        height: 40px;
+        text-align: center;
+        line-height: 40px; }
   body.editorBody .logoNameHere,
   body.editorBody .sloganNameHere {
     display: inline-block;
     position: absolute; }
-  body.editorBody .toggleIcon {
-    position: absolute;
-    left: 2vw;
-    top: 8vh;
-    width: 60px;
-    height: 60px;
-    line-height: 60px;
-    text-align: center;
-    border-radius: 50%;
-    box-shadow: 5px 8px 31px -10px #333;
+  body.editorBody .editPallet {
+    margin-top: 25px; }
+  body.editorBody .togglePanel .row .col-md-12,
+  body.editorBody .togglePanel .row .col-md-6 {
+    margin: 10px 0; }
+  body.editorBody .togglePanel p.heading {
     font-size: 26px;
-    color: #fff;
+    padding: 0;
+    font-weight: bold;
+    color: #000;
+    margin: 0; }
+  body.editorBody .togglePanel label {
+    position: relative;
+    width: 100%;
+    color: #000;
+    text-transform: uppercase;
+    font-weight: 100;
+    font-size: 10px;
+    bottom: -5px;
+    left: 0px;
+    margin: 0;
+    padding: 4px 0px;
+    background: #fff; }
+    body.editorBody .togglePanel label strong {
+      float: right; }
+  body.editorBody .togglePanel input.form-control,
+  body.editorBody .togglePanel select.form-control {
+    height: 42px;
+    padding: 6px 0;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    border-bottom: 1px #5d5d5d solid;
+    background: transparent;
+    color: #000;
+    font-size: 16px; }
+    body.editorBody .togglePanel input.form-control:focus,
+    body.editorBody .togglePanel select.form-control:focus {
+      border-bottom: 1px #188fca solid; }
+    body.editorBody .togglePanel input.form-control.colorPickerHere,
+    body.editorBody .togglePanel select.form-control.colorPickerHere {
+      padding-right: 46px; }
+  body.editorBody .togglePanel .colorBox {
+    float: right;
+    position: relative;
+    width: 26px;
+    height: 26px;
+    top: -34px;
+    right: 8px;
+    border-radius: 50%; }
+  body.editorBody .togglePanel input[type=range] {
+    -webkit-appearance: none;
+    margin: 18px 0;
+    width: 100%; }
+  body.editorBody .togglePanel input[type=range]:focus {
+    outline: none; }
+  body.editorBody .togglePanel input[type=range]::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 8.4px;
+    cursor: pointer;
+    animate: 0.2s;
+    box-shadow: 1px 1px 1px #ccc, 0px 0px 1px #ccc;
+    background: #ccc;
+    border-radius: 1.3px;
+    border: 0.2px solid #ccc; }
+  body.editorBody .togglePanel input[type=range]::-webkit-slider-thumb {
+    box-shadow: 1px 1px 1px #ccc, 0px 0px 1px #ccc;
+    height: 26px;
+    width: 26px;
+    border-radius: 50%;
     background: #333;
+    cursor: pointer;
+    -webkit-appearance: none;
+    margin-top: -8px; }
+  body.editorBody .togglePanel input[type=range]:focus::-webkit-slider-runnable-track {
+    background: #ccc; }
+  body.editorBody .togglePanel input[type=range]::-moz-range-track {
+    width: 100%;
+    height: 8.4px;
+    cursor: pointer;
+    animate: 0.2s;
+    box-shadow: 1px 1px 1px #ccc, 0px 0px 1px #ccc;
+    background: #ccc;
+    border-radius: 1.3px;
+    border: 0.2px solid #ccc; }
+  body.editorBody .togglePanel input[type=range]::-moz-range-thumb {
+    box-shadow: 1px 1px 1px #ccc, 0px 0px 1px #ccc;
+    border: 1px solid #ccc;
+    height: 36px;
+    width: 16px;
+    border-radius: 3px;
+    background: #ffffff;
     cursor: pointer; }
-    body.editorBody .toggleIcon:hover {
-      background: #eaeaea;
-      color: #000; }
-    body.editorBody .toggleIcon.active {
-      background: #333;
-      color: #fff;
-      width: 120px;
-      border-radius: 40px;
-      text-align: left;
-      padding: 0 17px; }
-    body.editorBody .toggleIcon.slogan {
-      top: 16vh; }
-    body.editorBody .toggleIcon.icon {
-      top: 24vh; }
-  body.editorBody .togglePanel {
-    position: absolute;
-    left: calc(3vw + 60px);
-    top: 5vh;
-    background: #333;
-    padding: 15px 30px;
-    width: calc(90% - 2vw - 60px);
-    height: 80vh;
-    border-radius: 5px; }
-    body.editorBody .togglePanel p.heading {
-      font-size: 26px;
-      padding: 15px 0;
-      font-weight: bold;
-      color: #fff;
-      margin: 0;
-      line-height: 50px; }
-    body.editorBody .togglePanel label {
-      position: relative;
-      color: #fff;
-      text-transform: uppercase;
-      font-weight: 100;
-      font-size: 10px;
-      bottom: -12px;
-      left: 10px;
-      margin: 0;
-      padding: 4px 8px;
-      background: #333; }
-    body.editorBody .togglePanel input.form-control,
-    body.editorBody .togglePanel select.form-control {
-      height: 50px;
-      border: 1px #5d5d5d solid;
-      background: transparent;
-      color: #fff;
-      font-size: 16px; }
-    body.editorBody .togglePanel .colorBox {
-      float: right;
-      position: relative;
-      width: 34px;
-      height: 34px;
-      top: -42px;
-      right: 8px;
-      border-radius: 50%; }
+  body.editorBody .togglePanel input[type=range]::-ms-track {
+    width: 100%;
+    height: 8.4px;
+    cursor: pointer;
+    animate: 0.2s;
+    background: transparent;
+    border-color: transparent;
+    border-width: 16px 0;
+    color: transparent; }
+  body.editorBody .togglePanel input[type=range]::-ms-fill-lower {
+    background: #ccc;
+    border: 0.2px solid #ccc;
+    border-radius: 2.6px;
+    box-shadow: 1px 1px 1px #ccc, 0px 0px 1px #ccc; }
+  body.editorBody .togglePanel input[type=range]::-ms-fill-upper {
+    background: #ccc;
+    border: 0.2px solid #ccc;
+    border-radius: 2.6px;
+    box-shadow: 1px 1px 1px #ccc, 0px 0px 1px #ccc; }
+  body.editorBody .togglePanel input[type=range]::-ms-thumb {
+    box-shadow: 1px 1px 1px #ccc, 0px 0px 1px #ccc;
+    border: 1px solid #ccc;
+    height: 36px;
+    width: 16px;
+    border-radius: 3px;
+    background: #188fca;
+    cursor: pointer; }
+  body.editorBody .togglePanel input[type=range]:focus::-ms-fill-lower {
+    background: #ccc; }
+  body.editorBody .togglePanel input[type=range]:focus::-ms-fill-upper {
+    background: #ccc; }
   body.editorBody .ui-resizable-handle {
     background: #333; }
   body.editorBody .ui-draggable-handle {

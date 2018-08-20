@@ -7,16 +7,21 @@
     <link rel="stylesheet" type="text/css" href="public/jquery-ui-1.12.1.custom/jquery-ui.min.css">
     <link rel="stylesheet" type="text/css" href="public/css/colorpicker.css">
     <link rel="stylesheet" type="text/css" href="public/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="public/tooltipster-master/dist/css/tooltipster.bundle.min.css" />
-    <link rel="stylesheet" type="text/css" href="public/tooltipster-master/dist/css/plugins/tooltipster/sideTip/themes/tooltipster-sideTip-borderless.min.css" />
     <link rel="stylesheet" type="text/css" href="public/css/fonts/font-awesome/font-awesome.css">
     <link rel="stylesheet" type="text/css" href="public/css/main.css" />
-    <link rel="stylesheet" type="text/css" href="public/css/select2.min.css" />
+
+    <!-- Including plugins css -->
+    <link rel="stylesheet" type="text/css" href="public/plugins/tooltipster-master/dist/css/tooltipster.bundle.min.css" />
+    <link rel="stylesheet" type="text/css" href="public/plugins/tooltipster-master/dist/css/plugins/tooltipster/sideTip/themes/tooltipster-sideTip-borderless.min.css" />
+    <link rel="stylesheet" type="text/css" href="public/plugins/ascolorpicker/asColorPicker.min.css" />
+    <link rel="stylesheet" type="text/css" href="public/plugins/asrange/asRange.min.css" />
+    <link rel="stylesheet" type="text/css" href="public/plugins/select2/select2.min.css" />
+    <link rel="stylesheet" type="text/css" href="public/plugins/switchery/switchery.min.css" />
 
     <link href="https://fonts.googleapis.com/css?family=Eczar|Hanalei+Fill|Indie+Flower|Josefin+Sans|Kirang+Haerang|Modern+Antiqua|Montserrat|Sunflower:300|Ubuntu|Work+Sans" rel="stylesheet">
 
 </head>
-<body class="editorBody" ng-app="logomakerapp">
+<body class="editorBody" ng-app="logomakerapp" ng-controller="logoMakerController" ng-init="init()">
 
     <nav class="navbar navbar-light bg-light">
         <a class="navbar-brand" href="#">
@@ -24,98 +29,149 @@
         </a>
         
         <form class="form-inline pull-right navbar-buttons">
-            <button class="btn btn-lg" type="button">Finish & Order</button>
+            <button class="btn btn-lg" type="button" ng-click="finish()">Finish & Order</button>
         </form>
     </nav>
 
-    <div class="container-fluid main-container" ng-controller="logoMakerController" ng-init="init()">
+    <div class="container-fluid main-container">
 
         <div class="row">
 
+            
+            <div class="col-md-8">
+                <div id="draggableParent" style="background-color: {{background}};">
+            
+                    <div id="svgIconHere" style="width: {{svg.size.width}}; height: {{svg.size.height}}; left: {{svg.position.left}}; top: {{svg.position.top}}; transform: rotate({{svg.rotate.rad}});"></div>
+        
+                    <div id="logoNameHere" class="logoNameHere" style="font-family: {{logoName.family}}; font-size: {{logoName.size}}px; font-weight: {{logoName.weight}}; font-style: {{logoName.style}}; color: {{logoName.color}}; left: {{logoName.position.left}}; top: {{logoName.position.top}}; transform: rotate({{logoName.rotate.rad}});">{{logoName.name}}</div>
+        
+                    <div id="sloganNameHere" ng-show="slogan.showSlogan" class="sloganNameHere" style="font-family: {{slogan.family}}; font-size: {{slogan.size}}px; font-weight: {{slogan.weight}}; font-style: {{slogan.style}}; color: {{slogan.color}};; left: {{slogan.position.left}}; top: {{slogan.position.top}}; transform: rotate({{slogan.rotate.rad}});">{{slogan.name}}</div>
+                    
+                    <div class="controls">
+                        <i class="icon fa-undo tooltipster" ng-click="undoredo('undo')" title="Undo" aria-hidden="true"></i>
+                        <i class="icon fa-repeat tooltipster" ng-click="undoredo('redo')" title="Redo" aria-hidden="true"></i>
+                    </div>
+
+                </div>
+            </div>
+
             <div class="col-md-4">
             
-                <div class="editPallet" id="logoNameSettings">
-
-                    <div class="toggleIcon tooltipster" title="Company Name Settings" ng-class="{active : showlogosetting == true}" ng-click="showiconsetting = false; showlogosetting = true; showslogansetting = false">
-                        <i class="icon fa-text-height" aria-hidden="true" ></i>
-                    </div>
+                <div class="editPallet col-md-12" id="logoNameSettings">
                     
-                    <div class="togglePanel" ng-show="showlogosetting">
-                        <p class="heading">Logo Name Settings</p>
-                        <label for="logoName">Change your company name</label>
-                        <input class="form-control" type="text" name="logoName" id="logoName" ng-model="logoName.name" placeholder="logoname" />
-                        <label for="logoColor">Change Font Color</label>
-                        <input class="form-control" colorpicker="rgba" colorpicker-position="right" name="logoColor" ng-model="logoName.color" type="text">
-                        <div class="colorBox" style="background: {{logoName.color}};"></div>
-                        
-                        <label for="logoStyle">Font Style</label>
-                        <select class="form-control" ng-model="logoName.style" name="logoStyle">
-                            <option value="normal">Normal</option>
-                            <option value="italic">Italic</option>
-                        </select>
-                        
-                        <select ng-model="logoName.weight">
-                            <option value="100">100</option>
-                            <option value="200">200</option>
-                            <option value="400">400</option>
-                            <option value="bold">bold</option>
-                            <option value="bolder">bolder</option>
-                        </select><br />
-                        <input type="text" ng-model="logoName.size" /><br/>
-                        <select ng-model="logoName.family">
-                            <option ng-repeat="family in fontFamilies" value="{{family.name}}">{{family.name}}</option>
-                        </select>
-                    </div>
-        
-                </div>
-        
-                <div class="editPallet" id="sloganSettings">
+                    <div class="togglePanel">
+                        <!-- <p class="heading">Logo Name Settings</p> -->
 
-                    <div class="toggleIcon slogan tooltipster" title="Slogan Settings" ng-class="{active : showslogansetting == true}" ng-click="showiconsetting = false; showlogosetting = false; showslogansetting = true">
-                        <i class="icon fa-strikethrough" aria-hidden="true"></i>
-                    </div>
-
-                    <div class="togglePanel" ng-show="showslogansetting">
-                        <p>Slogan Settings</p>
-
-                        <input type="checkbox" name="slogancheck" id="slogancheck" ng-model="slogan.showSlogan" />
-                        show slogan
-
-                        <div ng-show="slogan.showSlogan" class="col-md-12">
-                            <input type="text" name="slogan" id="slogan" ng-model="slogan.name" placeholder="slogan" /><br />
-                            <input colorpicker="rgba" colorpicker-position="left" ng-model="slogan.color" type="text"><br />
-                            <select ng-model="slogan.style">
-                                <option value="normal">Normal</option>
-                                <option value="italic">Italic</option>
-                            </select><br />
-                            <select ng-model="slogan.weight">
-                                <option value="100">100</option>
-                                <option value="200">200</option>
-                                <option value="400">400</option>
-                                <option value="bold">bold</option>
-                                <option value="bolder">bolder</option>
-                            </select><br />
-                            <input type="text" ng-model="slogan.size" /><br/>
-                            <select ng-model="slogan.family">
-                                <option ng-repeat="family in fontFamilies" value="{{family.name}}">{{family.name}}</option>
-                            </select>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <label for="logoName">Change your company name</label>
+                                <input class="form-control" type="text" name="logoName" id="logoName" ng-model="logoName.name" placeholder="logoname" ng-change="updateHistory()" />
+                            </div>
+                            <div class="col-md-6">
+                                <label for="logoStyle">Font Style</label>
+                                <select class="form-control" ng-model="logoName.style" name="logoStyle" ng-change="updateHistory()">
+                                    <option value="normal">Normal</option>
+                                    <option value="italic">Italic</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="logoWeight">Font weight</label>
+                                <select class="form-control" ng-model="logoName.weight" name="logoWeight" ng-change="updateHistory()">
+                                    <option value="100">100</option>
+                                    <option value="200">200</option>
+                                    <option value="400">400</option>
+                                    <option value="bold">bold</option>
+                                    <option value="bolder">bolder</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="logoSize">Font Size <strong>{{logoName.size}}px</strong></label><br/>
+                                <input type="range" min="10" max="200" name="logoSize" ng-model="logoName.size" step="1" />
+                            </div>
+                            <div class="col-md-6">
+                                <label for="logFamily">Font Family</label>
+                                <select class="form-control" ng-model="logoName.family" name="logFamily" ng-change="updateHistory()">
+                                    <option ng-repeat="family in fontFamilies" value="{{family.name}}">{{family.name}}</option>
+                                </select>
+                            </div>
                         </div>
+                        
                     </div>
         
                 </div>
         
-                <div class="editPallet" id="iconSettings">
-                    
-                    <div class="toggleIcon icon tooltipster" title="Icon Settings" ng-class="{active : showiconsetting == true}" ng-click="showiconsetting = true; showlogosetting = false; showslogansetting = false">
-                        <i class="icon fa-automobile" aria-hidden="true"></i>
-                    </div>
+                <div class="editPallet col-md-12" id="sloganSettings">
 
-                    <div class="togglePanel" ng-show="showiconsetting">
-                        <p>background color</p>
-                        <input colorpicker="rgba" colorpicker-position="right" ng-model="background" type="text" /><br />
-                        <p>Icon Settings</p>
-                        <input ng-repeat="path in svg.paths"
-                            id="input_{{path.id}}" colorpicker="rgba" colorpicker-position="left" ng-model="path.fill" ng-change="updateFillColor(path.id)" type="text"><br />
+                    <div class="togglePanel">
+                        <input type="checkbox" name="slogancheck" id="slogancheck" ng-model="slogan.showSlogan" class="js-switch" />
+                        &nbsp;&nbsp;<strong style="top: 3px; position: relative;">Add Text</strong>
+
+                        <div class="row" ng-show="slogan.showSlogan">
+                            <div class="col-md-12">
+                                <label for="slogan">Change your company Slogan</label>
+                                <input class="form-control" type="text" name="slogan" id="slogan" ng-model="slogan.name" placeholder="slogan" ng-change="updateHistory()" />
+                            </div>
+                            <div class="col-md-6">
+                                <label for="textStyle">Text Style</label>
+                                <select class="form-control" ng-model="slogan.style" name="textStyle" ng-change="updateHistory()">
+                                    <option value="normal">Normal</option>
+                                    <option value="italic">Italic</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="textWeight">Text weight</label>
+                                <select class="form-control" ng-model="slogan.weight" name="textWeight" ng-change="updateHistory()">
+                                    <option value="100">100</option>
+                                    <option value="200">200</option>
+                                    <option value="400">400</option>
+                                    <option value="bold">bold</option>
+                                    <option value="bolder">bolder</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="textSize">Text Size <strong>{{slogan.size}}px</strong></label><br/>
+                                <input type="range" min="10" max="100" name="textSize" value="{{slogan.size}}" ng-model="slogan.size" step="1" />
+                            </div>
+                            <div class="col-md-6">
+                                <label for="textFamily">Text Family</label>
+                                <select class="form-control" ng-model="slogan.family" name="textFamily" ng-change="updateHistory()">
+                                    <option ng-repeat="family in fontFamilies" value="{{family.name}}">{{family.name}}</option>
+                                </select>
+                            </div>
+                        </div>
+
+                    </div>
+        
+                </div>
+        
+                <div class="editPallet col-md-12" id="iconSettings">
+                    
+                    <div class="togglePanel">
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <label for="background">Background Color</label>
+                                <input class="form-control" colorpicker="rgba" colorpicker-position="right" name="background" ng-model="background" type="text">
+                                <div class="colorBox" style="background: {{background}};"></div>
+                            </div>
+                            <div ng-class="slogan.showSlogan ? 'col-md-6' : 'col-md-12'" style="top: -34px;">
+                                <label for="logoColor">Comapny Name Color</label>
+                                <input class="form-control" colorpicker="rgba" colorpicker-position="right" name="logoColor" ng-model="logoName.color" type="text">
+                                <div class="colorBox" style="background: {{logoName.color}};"></div>
+                            </div>
+                            <div ng-class="slogan.showSlogan ? 'col-md-6' : 'col-md-12'" ng-show="slogan.showSlogan" style="top: -34px;">
+                                <label for="sloganColor">Text Color</label>
+                                <input class="form-control" colorpicker="rgba" colorpicker-position="right" name="sloganColor" ng-model="slogan.color" type="text">
+                                <div class="colorBox" style="background: {{slogan.color}};"></div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label for="iconColor" style="top: -34px; padding-left: 15px;">Icon Colors</label>
+                            <div class="col-md-4" ng-repeat="path in svg.paths" id="input_{{path.id}}" style="top: -34px; height: auto;">
+                                <input class="form-control colorPickerHere tooltipster" title="{{path.id}}" colorpicker="rgba" colorpicker-position="right" name="sloganColor{{path.id}}" ng-model="path.fill" ng-change="updateFillColor(path.id)" type="text">
+                                <div class="colorBox" style="background: {{path.fill}};"></div>
+                            </div>
+                        </div>
                     </div>
 
                     
@@ -128,18 +184,6 @@
 
                 </div>
 
-            </div>
-
-            <div class="col-md-8" style="background-color: {{background}};">
-                <div id="draggableParent">
-            
-                    <div id="svgIconHere" style="width: {{svg.size.width}}; height: {{svg.size.height}}; left: {{svg.position.left}}; top: {{svg.position.top}}; transform: rotate({{svg.rotate.rad}});"></div>
-        
-                    <div id="logoNameHere" class="logoNameHere" style="font-family: {{logoName.family}}; font-size: {{logoName.size}}; font-weight: {{logoName.weight}}; font-style: {{logoName.style}}; color: {{logoName.color}}; left: {{logoName.position.left}}; top: {{logoName.position.top}}; transform: rotate({{logoName.rotate.rad}});">{{logoName.name}}</div>
-        
-                    <div id="sloganNameHere" ng-show="slogan.showSlogan" class="sloganNameHere" style="font-family: {{slogan.family}}; font-size: {{slogan.size}}; font-weight: {{slogan.weight}}; font-style: {{slogan.style}}; color: {{slogan.color}};; left: {{slogan.position.left}}; top: {{slogan.position.top}}; transform: rotate({{slogan.rotate.rad}});">{{slogan.name}}</div>
-        
-                </div>
             </div>
 
         </div>
@@ -158,10 +202,21 @@
 
     <script type="text/javascript" src="public/js/jquery-3.3.1.min.js"></script>
     <script type="text/javascript" src="public/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
-    <script type="text/javascript" src="public/tooltipster-master/dist/js/tooltipster.bundle.min.js"></script>
     <script type="text/javascript" src="public/js/jquery.ui.rotatable.js"></script>
     <script type="text/javascript" src="public/js/bootstrap-colorpicker-module.js"></script>
-    <script type="text/javascript" src="public/js/select2.js"></script>
-    <script type="text/javascript" src="public/js/main.js"></script>
+
+    <!-- Including plugins js -->
+    <script type="text/javascript" src="public/plugins/tooltipster-master/dist/js/tooltipster.bundle.min.js"></script>
+    <script type="text/javascript" src="public/plugins/ascolorpicker/jquery-asColorPicker.min.js"></script>
+    <script type="text/javascript" src="public/plugins/ascolor/jquery-asColor.min.js"></script>
+    <script type="text/javascript" src="public/plugins/asrange/jquery-asRange.min.js"></script>
+    <script type="text/javascript" src="public/plugins/select2/select2.min.js"></script>
+    <script type="text/javascript" src="public/plugins/select2/select2.full.min.js"></script>
+    <script type="text/javascript" src="public/plugins/switchery/switchery.min.js"></script>
+
+    <script>
+        
+        var init = new Switchery(document.querySelector('.js-switch'), { color: '#eaeaea', jackColor: '#188fca' });
+    </script>
 
 </html>

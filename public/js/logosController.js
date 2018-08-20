@@ -83,7 +83,7 @@ angular.module('logos.controllers', []).controller('logosController', function (
                     family : $(this).parents('.col-lg-3').find('text').css('font-family'),
                     style : $(this).parents('.col-lg-3').find('text').css('font-style'),
                     weight : $(this).parents('.col-lg-3').find('text').css('font-weight'),
-                    size : $(this).parents('.col-lg-3').find('text').css('font-size'),
+                    size : parseInt($(this).parents('.col-lg-3').find('text').css('font-size')),
                     color : $(this).parents('.col-lg-3').find('text').css('fill'),
                     position : {
                         left : $(this).parents('.col-lg-3').attr('logoleft') + 'px',
