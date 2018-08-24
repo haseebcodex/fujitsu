@@ -38,25 +38,8 @@
         <div class="row">
 
             
-            <div class="col-md-8">
-                <div id="draggableParent" style="background-color: {{background}};">
-            
-                    <div id="svgIconHere" style="width: {{svg.size.width}}; height: {{svg.size.height}}; left: {{svg.position.left}}; top: {{svg.position.top}}; transform: rotate({{svg.rotate.rad}});"></div>
-        
-                    <div id="logoNameHere" class="logoNameHere" style="font-family: {{logoName.family}}; font-size: {{logoName.size}}px; font-weight: {{logoName.weight}}; font-style: {{logoName.style}}; color: {{logoName.color}}; left: {{logoName.position.left}}; top: {{logoName.position.top}}; transform: rotate({{logoName.rotate.rad}});">{{logoName.name}}</div>
-        
-                    <div id="sloganNameHere" ng-show="slogan.showSlogan" class="sloganNameHere" style="font-family: {{slogan.family}}; font-size: {{slogan.size}}px; font-weight: {{slogan.weight}}; font-style: {{slogan.style}}; color: {{slogan.color}};; left: {{slogan.position.left}}; top: {{slogan.position.top}}; transform: rotate({{slogan.rotate.rad}});">{{slogan.name}}</div>
-                    
-                    <div class="controls">
-                        <i class="icon fa-undo tooltipster" ng-click="undoredo('undo')" title="Undo" aria-hidden="true"></i>
-                        <i class="icon fa-repeat tooltipster" ng-click="undoredo('redo')" title="Redo" aria-hidden="true"></i>
-                    </div>
-
-                </div>
-            </div>
-
             <div class="col-md-4">
-            
+        
                 <div class="editPallet col-md-12" id="logoNameSettings">
                     
                     <div class="togglePanel">
@@ -185,6 +168,25 @@
                 </div>
 
             </div>
+
+            
+            <div class="col-md-8">
+                <div id="draggableParent" style="background-color: {{background}};">
+            
+                    <div id="svgIconHere" style="width: {{svg.size.width}}; height: {{svg.size.height}}; left: {{svg.position.left}}; top: {{svg.position.top}}; transform: rotate({{svg.rotate.rad}});"></div>
+        
+                    <div id="logoNameHere" class="logoNameHere" style="font-family: {{logoName.family}}; font-size: {{logoName.size}}px; font-weight: {{logoName.weight}}; font-style: {{logoName.style}}; color: {{logoName.color}}; left: {{logoName.position.left}}; top: {{logoName.position.top}}; transform: rotate({{logoName.rotate.rad}});">{{logoName.name}}</div>
+        
+                    <div id="sloganNameHere" ng-show="slogan.showSlogan" class="sloganNameHere" style="font-family: {{slogan.family}}; font-size: {{slogan.size}}px; font-weight: {{slogan.weight}}; font-style: {{slogan.style}}; color: {{slogan.color}};; left: {{slogan.position.left}}; top: {{slogan.position.top}}; transform: rotate({{slogan.rotate.rad}});">{{slogan.name}}</div>
+                    
+                    <div class="controls">
+                        <i class="icon fa-undo tooltipster" ng-click="undoredo('undo')" title="Undo" aria-hidden="true"></i>
+                        <i class="icon fa-repeat tooltipster" ng-click="undoredo('redo')" title="Redo" aria-hidden="true"></i>
+                    </div>
+
+                </div>
+            </div>
+
 
         </div>
 

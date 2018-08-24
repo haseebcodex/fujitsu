@@ -276,7 +276,7 @@ angular.module('logomaker.controllers', ['colorpicker.module']).controller('logo
             $scope.editHistory.length = $scope.editStep;
         }
         $scope.editHistory.push(JSON.stringify(update));
-        console.log($scope.editHistory);
+        // console.log($scope.editHistory);
     };
 
     $scope.undoredo = function(check){
