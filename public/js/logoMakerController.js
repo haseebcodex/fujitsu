@@ -206,12 +206,12 @@ angular.module('logomaker.controllers', ['colorpicker.module']).controller('logo
         if(id == "logoNameHere"){
             $scope.logoName.position.left = ui.position.left + 'px';
             $scope.logoName.position.top = ui.position.top + 'px';
-            console.log($scope.logoName);
+            // console.log($scope.logoName);
         }
         else if(id == 'sloganNameHere'){
             $scope.slogan.position.left = ui.position.left + 'px';
             $scope.slogan.position.top = ui.position.top + 'px';
-            console.log($scope.slogan);
+            // console.log($scope.slogan);
         }
     };
 
@@ -221,12 +221,12 @@ angular.module('logomaker.controllers', ['colorpicker.module']).controller('logo
         if(id == "logoNameHere"){
             $scope.logoName.rotate.rad = ui.angle.current + 'rad';
             $scope.logoName.rotate.degree = ui.angle.degrees + 'deg';
-            console.log($scope.logoName);
+            // console.log($scope.logoName);
         }
         else if(id == 'sloganNameHere'){
             $scope.slogan.rotate.rad = ui.angle.current + 'rad';
             $scope.slogan.rotate.degree = ui.angle.degrees + 'deg';
-            console.log($scope.slogan);
+            // console.log($scope.slogan);
         }
     };
 
@@ -260,7 +260,7 @@ angular.module('logomaker.controllers', ['colorpicker.module']).controller('logo
     };
 
     $scope.updateFillColor = function (id) {
-        console.log(id);
+        // console.log(id);
         var onlyId = $('#' + id).attr('pathid');
         $('#' + id).css('fill', $scope.svg.paths[onlyId].fill);
     };
@@ -304,8 +304,19 @@ angular.module('logomaker.controllers', ['colorpicker.module']).controller('logo
             }
         // $scope.svg.position.left = "0px"
     };
+
+    $scope.changeLogo = function(){
+        $window.location.href = "logos.html"
+    };
     
     $scope.finish = function(){
+        $scope.completeLogo = {
+            svg : $scope.svg,
+            logoname : $scope.logoName,
+            slogan : $scope.slogan
+        };
+
+        console.log($scope.completeLogo);
     };
 
 });

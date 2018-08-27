@@ -152,5 +152,9 @@ angular.module('logos.controllers', []).controller('logosController', function (
         window.location.href = "customlogo.html";
     };
 
+    $scope.changeCat = function(){
+        $window.location.href = "start.html";
+    };
+
 
 });

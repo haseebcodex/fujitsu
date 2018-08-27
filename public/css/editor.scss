@@ -26,9 +26,14 @@ body{
                     color: #fff;
                     border-radius: 0;
                     outline: none;
+                    margin: 0px 0px 0px 15px;
 
                     &:hover{
                         background: #095d86;
+                    }
+
+                    &.black{
+                        background: #545454;
                     }
                 }
             }

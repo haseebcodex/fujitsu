@@ -737,9 +737,12 @@ body.editorBody {
         font-size: 14px;
         color: #fff;
         border-radius: 0;
-        outline: none; }
+        outline: none;
+        margin: 0px 0px 0px 15px; }
         body.editorBody .navbar .navbar-buttons .btn:hover {
           background: #095d86; }
+        body.editorBody .navbar .navbar-buttons .btn.black {
+          background: #545454; }
   body.editorBody .main-container {
     margin-top: 68px;
     height: calc(100vh - 68px); }

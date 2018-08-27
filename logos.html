@@ -15,9 +15,19 @@
 
 
 </head>
-<body ng-app="logomakerapp" class="logos">
+<body ng-app="logomakerapp" class="logos editorBody" ng-controller="logosController" ng-init="init()" style="background: #fff;">
 
-    <div ng-controller="logosController" ng-init="init()">
+    <nav class="navbar navbar-light bg-light">
+        <a class="navbar-brand" href="#">
+            <img src="https://www.logoskill.com/Images/favi.png" width="45" height="45" alt="">
+        </a>
+        
+        <form class="form-inline pull-right navbar-buttons">
+            <button class="btn btn-lg black" type="button" ng-click="changeCat()">Back</button>
+        </form>
+    </nav>
+
+    <div style="margin-top: 68px;">
         
         <!-- <div class="container-fluid custom-fluid">
             <h2>Company: {{company}}</h2>
