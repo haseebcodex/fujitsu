@@ -41,15 +41,15 @@ angular.module('logos.controllers', []).controller('logosController', function (
         // console.log(JSON.parse(data));
         
          for(var i = 0; i < data.length; i++){
-            console.log(data[i]);
-            var data = data[i].replace(/osamaShakir/g, "'");
-            data = JSON.parse(data);
-            console.log(data);
+            // console.log(data[i]);
+            var data2 = data[i].replace(/osamaShakir/g, "'");
+            data2 = JSON.parse(data2);
+            // console.log(data2);
             // var content = '<div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 text-center" logoleft="'+ data.svg.company.position.left +'" logotop="'+ data.svg.company.position.top +'" sloganleft="'+ data.svg.slogan.position.left +'" slogantop="'+ data.svg.slogan.position.top +'">'+
-            var content = '<div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 text-center" logoleft="'+ data.svg.company.position.left +'" logotop="'+ data.svg.company.position.top +'">'+
-                data.svg.value+
-                '<div class="onlyIconHere" iconleft="'+ data.icon.position.left +'" icontop="'+ data.icon.position.top +'" iconwidth="'+ data.icon.size.width +'" iconheight="'+ data.icon.size.height +'">'+
-                data.icon.value+
+            var content = '<div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 text-center" logoleft="'+ data2.svg.company.position.left +'" logotop="'+ data2.svg.company.position.top +'">'+
+                data2.svg.value+
+                '<div class="onlyIconHere" iconleft="'+ data2.icon.position.left +'" icontop="'+ data2.icon.position.top +'" iconwidth="'+ data2.icon.size.width +'" iconheight="'+ data2.icon.size.height +'">'+
+                data2.icon.value+
                 '</div>'+
                 '<div class="row btn-show-hide">'+
                     '<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">'+

@@ -78,6 +78,8 @@ angular.module('logomaker.controllers', ['colorpicker.module']).controller('logo
         else{
             $scope.loadLogo();
         }
+      
+        document.onkeydown = $scope.keyPress;
 
     };
 
@@ -303,6 +305,16 @@ angular.module('logomaker.controllers', ['colorpicker.module']).controller('logo
                 }
             }
         // $scope.svg.position.left = "0px"
+    };
+
+    $scope.keyPress = function(e) {
+        var evtobj = window.event? event : e
+        if (evtobj.keyCode == 90 && evtobj.ctrlKey && !evtobj.shiftKey){
+            $('i#undoHere').trigger('click');
+        }
+        if (evtobj.keyCode == 90 && evtobj.ctrlKey && evtobj.shiftKey){
+            $('i#redoHere').trigger('click');
+        }
     };
 
     $scope.changeLogo = function(){
