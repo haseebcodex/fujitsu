@@ -629,17 +629,53 @@ body {
     margin-bottom: 0 !important;
 }
 
+.previewPopup{
+    position: fixed;
+    left: 5vw;
+    top: 5vh;
+    width: 90vw;
+    height: 90vh;
+    background: #fff;
+    z-index: 99999;
+    box-shadow: 0px 0px 72px -20px #333;
+    overflow: auto;
+    display: none;
+}
+
 .container-fluid-choose-logo {
     .row-choose-logo {
         .col-lg-3.col-md-3.col-sm-3.col-xs-12 {
-            border: 1px solid #0000000a;
+            // border: 1px solid #0000000a;
             position: relative;
-            height: 398px;
+            height: 360px;
             overflow: hidden;
+            /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#dddddd+0,ffffff+60 */
+            background: #dddddd; /* Old browsers */
+            background: -moz-radial-gradient(center, ellipse cover, #dddddd 0%, #ffffff 60%); /* FF3.6-15 */
+            background: -webkit-radial-gradient(center, ellipse cover, #dddddd 0%,#ffffff 60%); /* Chrome10-25,Safari5.1-6 */
+            background: radial-gradient(ellipse at center, #dddddd 0%,#ffffff 60%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#dddddd', endColorstr='#ffffff',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+            
+            &:hover{
+                &::before{
+                    content: '';
+                    background: rgba(255,255,255,0.7);
+                    position: absolute;
+                    width: 100%;
+                    height: 100%;
+                    left: 0;
+                    top: 0;
+                    z-index: 1;
+                }
+                .previewIcon{
+                    display: block;
+                }
+            }
             svg {
-                // width: 398px;
-                // height: 398px;
+                max-width: 340px;
+                height: 340px;
                 position: relative;
+                margin-top: 10px;
             }
             input[type="button"] {
                 font-size: 14px;
@@ -651,8 +687,29 @@ body {
                 margin-left: auto;
                 margin-right: auto;
                 color: #fff;
+                border-radius: 5px;
                 &:hover {
                     background-color: #095d86;
+                }
+            }
+            .previewIcon{
+                display: none;
+                position: absolute;
+                left: 45%;
+                top: 40%;
+                z-index: 999;
+                cursor: pointer;
+                font-size: 24px;
+                width: 60px;
+                height: 60px;
+                line-height: 60px;
+                text-align: center;
+                background: rgba(0,0,0,0.6);
+                color: #fff;
+                border-radius: 50%;
+
+                &:hover{
+                    background: rgba(0,0,0,0.9);
                 }
             }
         }
@@ -667,12 +724,13 @@ body {
                 position: absolute;
                 padding: 0;
                 width: 100%;
+                z-index: 2;
             }
             .col-lg-6 {
                 &.col-md-6 {
                     &.col-sm-6 {
                         &.col-xs-6 {
-                            padding: 0px !important;
+                            // padding: 0px !important;
                         }
                     }
                 }

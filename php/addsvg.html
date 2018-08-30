@@ -149,8 +149,11 @@
 
     function developSvgObject(){
 
-        var fullsvg = $('#mainsvgcode').val().replace(/"/g, 'osamaShakir');
-        var iconsvg = $('#iconsvgcode').val().replace(/"/g, 'osamaShakir');;
+        var seconds = new Date().getTime() / 1000;
+        var random = parseInt(seconds);
+        var random2 = random + 1;
+        var fullsvg = $('#mainsvgcode').val().replace(/cls/g, 'cls'+random).replace(/linear-gradient/g, random+'linear-gradient').replace(/radial-gradient/g, random+'radial-gradient').replace(/clip-path/g, random+'clip-path').replace(/"/g, 'osamaShakir');
+        var iconsvg = $('#iconsvgcode').val().replace(/cls/g, 'cls'+random2).replace(/linear-gradient/g, random2+'linear-gradient').replace(/radial-gradient/g, random2+'radial-gradient').replace(/clip-path/g, random2+'clip-path').replace(/"/g, 'osamaShakir');
 
         var svgCode = {
             svg : {

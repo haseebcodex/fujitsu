@@ -6,6 +6,14 @@ angular.module('logos.controllers', []).controller('logosController', function (
     // $scope.namelist;
     // $scope.sloganlist;
 
+    //List for showing the preview
+    // $scope.previews = [
+    //     { id : 0, image : 'Eczar', transform: '0' },
+    //     { id : 1, image : 'Eczar', transform: '0' },
+    //     { id : 2, image : 'Eczar', transform: '0' },
+    //     { id : 3, image : 'Eczar', transform: '0' }
+    // ];
+
     $scope.init = function () {
 
         if(!$scope.category || !$scope.company){
@@ -27,6 +35,7 @@ angular.module('logos.controllers', []).controller('logosController', function (
             success:function(data){
 
                 $scope.loadSvgs(data);
+                $scope.addAttributes();
 
             },
             error: function(error){
@@ -73,6 +82,10 @@ angular.module('logos.controllers', []).controller('logosController', function (
             var val = $(this).attr('value');
             if(val == 'Edit'){
 
+                var textColor = $(this).parents('.col-lg-3').find('text').css('fill');
+                if(textColor.indexOf('linear-gradient') > -1){
+                    textColor = 'black';
+                }
                 var logoName = {
                     name : $scope.company,
                     // family : $(this).parents('.col-lg-3').find('text[id="logoname"]').css('font-family'),
@@ -84,7 +97,7 @@ angular.module('logos.controllers', []).controller('logosController', function (
                     style : $(this).parents('.col-lg-3').find('text').css('font-style'),
                     weight : $(this).parents('.col-lg-3').find('text').css('font-weight'),
                     size : parseInt($(this).parents('.col-lg-3').find('text').css('font-size')),
-                    color : $(this).parents('.col-lg-3').find('text').css('fill'),
+                    color : textColor,
                     position : {
                         left : $(this).parents('.col-lg-3').attr('logoleft') + 'px',
                         top : $(this).parents('.col-lg-3').attr('logotop') + 'px'
@@ -140,6 +153,16 @@ angular.module('logos.controllers', []).controller('logosController', function (
         
         // $('svg').on('click', function(){
         //     $scope.sendSelectedSvg($(this)[0].outerHTML);
+        // });
+    };
+
+    $scope.addAttributes = function(){
+        $('svg text').attr({'x':"50%", 'y':"", 'alignment-baseline':"middle", 'text-anchor':"middle"});
+
+        // $('.tooltipster').tooltipster({
+        //     animation: 'fade',
+        //     delay: 0,
+        //     theme: 'tooltipster-borderless'
         // });
     };
 
