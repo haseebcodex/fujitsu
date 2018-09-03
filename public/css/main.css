@@ -103,7 +103,7 @@ body {
     z-index: 1; }
   .custom-fluid .custom-fluid-row .custom-fluid-row-col input[type="button"]:hover {
     background-color: transparent;
-    border: 1px solid #00bd9b;
+    border: 1px solid #41ac00;
     padding: 14px 34px 14px 14px;
     color: #000;
     letter-spacing: 5px;
@@ -114,7 +114,9 @@ body {
     animation: animateLefttt 0.8s; }
   .custom-fluid .custom-fluid-row .custom-fluid-row-col .arrow {
     position: absolute;
-    transition: all .5s ease-in-out; }
+    top: 10px;
+    left: 1200px;
+    transition: all .5s linear; }
   .custom-fluid .custom-fluid-row .custom-fluid-row-col .arrow::after {
     content: "\00bb";
     font-style: normal;
@@ -125,15 +127,14 @@ body {
     opacity: 0;
     font-size: 20px;
     padding-right: 0.5em;
-    position: absolute;
-    top: 10px;
-    right: -1215px;
-    left: auto; }
+    position: absolute; }
   .custom-fluid .custom-fluid-row .custom-fluid-row-col input[type="button"]:hover ~ .arrow-get-started::after {
     opacity: 1;
     animation: animateLeftttG 0.8s; }
   .custom-fluid .custom-fluid-row .custom-fluid-row-col .arrow-get-started {
     position: absolute;
+    top: 82px;
+    left: 957px;
     transition: all .5s ease-in-out; }
   .custom-fluid .custom-fluid-row .custom-fluid-row-col .arrow-get-started::after {
     content: "\00bb";
@@ -145,10 +146,7 @@ body {
     opacity: 0;
     font-size: 20px;
     padding-right: 0.5em;
-    position: absolute;
-    top: -40px;
-    right: -970px;
-    left: auto; }
+    position: absolute; }
   .custom-fluid .custom-fluid-row .custom-fluid-row-col .watch-video {
     display: flex;
     margin-top: 40px;
@@ -171,17 +169,35 @@ body {
 
 @keyframes animateLeftttG {
   0% {
-    right: -960px;
+    left: -30px;
+    opacity: 0; }
+  50% {
+    left: 10px;
+    opacity: 0.5; }
+  60% {
+    left: 10px;
+    opacity: 0; }
+  70% {
+    left: -30px;
     opacity: 0; }
   100% {
-    right: -970px;
+    left: 0;
     opacity: 1; } }
 @keyframes animateLefttt {
   0% {
-    right: -1205px;
+    left: -30px;
+    opacity: 0; }
+  50% {
+    left: 10px;
+    opacity: 0.5; }
+  60% {
+    left: 10px;
+    opacity: 0; }
+  70% {
+    left: -30px;
     opacity: 0; }
   100% {
-    right: -1215px;
+    left: 0;
     opacity: 1; } }
 .wrapper {
   margin-top: 30px; }

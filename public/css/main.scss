@@ -168,7 +168,7 @@ body {
             }
             input[type="button"]:hover {
                 background-color: transparent;
-                border: 1px solid $a-hover-Color;
+                border: 1px solid $Color;
                 padding: 14px 34px 14px 14px;
                 color: #000;
                 letter-spacing: 5px;
@@ -181,7 +181,9 @@ body {
             }
             .arrow {
                 position: absolute;
-                transition: all .5s ease-in-out;
+                top: 10px;
+                left: 1200px;
+                transition: all .5s linear;
             }
             .arrow::after {
                 content: "\00bb";
@@ -194,9 +196,6 @@ body {
                 font-size: 20px;
                 padding-right: 0.5em;
                 position: absolute;
-                top: 10px;
-                right: -1215px;
-                left: auto;
             }
             input[type="button"]:hover~.arrow-get-started::after {
                 opacity: 1;
@@ -204,6 +203,8 @@ body {
             }
             .arrow-get-started {
                 position: absolute;
+                top: 82px;
+                left: 957px;
                 transition: all .5s ease-in-out;
             }
             .arrow-get-started::after {
@@ -217,9 +218,6 @@ body {
                 font-size: 20px;
                 padding-right: 0.5em;
                 position: absolute;
-                top: -40px;
-                right: -970px;
-                left: auto;
             }
             .watch-video {
                 display: flex;
@@ -250,22 +248,46 @@ body {
 
 @keyframes animateLeftttG {
     0% {
-        right: -960px;
+        left: -30px;
+        opacity: 0;
+    }
+    50% {
+        left: 10px;
+        opacity: 0.5;
+    }
+    60% {
+        left: 10px;
+        opacity: 0;
+    }
+    70% {
+        left: -30px;
         opacity: 0;
     }
     100% {
-        right: -970px;
+        left: 0;
         opacity: 1;
     }
 }
 
 @keyframes animateLefttt {
     0% {
-        right: -1205px;
+        left: -30px;
+        opacity: 0;
+    }
+    50% {
+        left: 10px;
+        opacity: 0.5;
+    }
+    60% {
+        left: 10px;
+        opacity: 0;
+    }
+    70% {
+        left: -30px;
         opacity: 0;
     }
     100% {
-        right: -1215px;
+        left: 0;
         opacity: 1;
     }
 }
