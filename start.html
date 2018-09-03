@@ -29,11 +29,11 @@
                     <p class="text-center p-tagline slide-in-blurred-right-p">Use our logo maker to instantly create stunning logo designs for your business.</p>
                     <div class="center-block nameSlogan slide-in-blurred-left-h1" ng-if="step > 1">
 
-                        <h3 class="text-center">Company Name: <strong style="color: #8554fa">{{companyName}}</strong></h3>
+                        <h3 class="text-center" style="font-variant: petite-caps;">Company Name: <strong style="color: #8554fa">{{companyName}}</strong></h3>
 
                         <br>
 
-                        <h3 class="text-center slide-in-blurred-right-p" ng-if="step == 3">Slogan: <strong style="color: #8554fa">{{sloganName}}</strong></h3>
+                        <!-- <h3 class="text-center slide-in-blurred-right-p" ng-if="step == 3">Slogan: <strong style="color: #8554fa">{{sloganName}}</strong></h3> -->
 
 
 
@@ -44,6 +44,7 @@
                             <div class="formRow--item" ng-show="step == 1">
                                 <label for="companyname" class="formRow--input-wrapper js-inputWrapper">
                                     <input type="text" class="formRow--input js-input" id="companyname" ng-model="companyName" placeholder="Enter Your Company Name">
+                                    
                                 </label>
                             </div>
                             <!-- <div class="formRow--item" ng-show="step == 2">
@@ -55,6 +56,7 @@
 
                         <!-- <input type="text" placeholder="Enter Your Company Name"> -->
                         <input type="button" ng-if="step == 1" value="Next" ng-click="checkCompanyName()">
+                        <span class="arrow"></span>
                         <!-- <input type="button" ng-if="step == 2" value="Next" ng-click="checkSloganName()"> -->
                     </div>
                     <span class="required_error text-center slide-in-blurred-left-h1" ng-if="requiredCompanyName">Company name is required.</span>
@@ -67,6 +69,7 @@
                             <option ng-repeat="cat in categories" value="{{cat.value}}">{{cat.value}}</option>
                         </select>
                         <input class="center-block" type="button" value="Get Started" ng-click="checkCategories()">
+                        <span class="arrow-get-started"></span>
                     </form>
                     <span class="required_error text-center" ng-if="requiredCategory">Category is required.</span>
 

@@ -23,7 +23,7 @@ angular.module('getstarted.controllers', []).controller('getStartedController', 
             localStorage.setItem('companyname', $scope.companyName);
             $scope.step = 2;
 
-            $('#anim1').addClass('slide-in-blurred-left-h1'); // add animation class to the fields
+            $('#anim1').addClass('slide-in-blurred-right-p'); // add animation class to the fields
 
             // init the select2 dropdown for categories
             $('.js-example-basic-multiple').select2({

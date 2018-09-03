@@ -1,5 +1,5 @@
 <?php
-$con = mysqli_connect("localhost","root","","logoskill_db");
+$con = mysqli_connect("localhost","root","","logomaker");
 
 // Check connection
 if (mysqli_connect_errno())
