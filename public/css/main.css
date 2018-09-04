@@ -590,9 +590,8 @@ body {
       background-color: transparent;
       border: 1px solid #00bd9b;
       padding: 14px;
-      border-radius: 0px 0px 0px 0px;
       color: #FFF;
-      box-shadow: 178px 0px 15px #41ac00 inset;
+      box-shadow: 178px 0px 4px #41ac00 inset;
       letter-spacing: 5px;
       font-weight: 700;
       text-indent: -20px; }
@@ -614,7 +613,7 @@ body {
     padding-right: 0.5em;
     position: absolute;
     top: -45px;
-    left: 86px; }
+    left: 84px; }
   .container-fluid-choose-logo .row-choose-logo .col-lg-3.col-md-3.col-sm-3.col-xs-12 .previewIcon {
     display: none;
     position: absolute;

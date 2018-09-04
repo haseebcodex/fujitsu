@@ -796,9 +796,8 @@ body {
                     background-color: transparent;
                     border: 1px solid $a-hover-Color;
                     padding: 14px;
-                    border-radius: 0px 0px 0px 0px;
                     color: #FFF;
-                    box-shadow: 178px 0px 15px $Color inset;
+                    box-shadow: 178px 0px 4px $Color inset;
                     letter-spacing: 5px;
                     font-weight: 700;
                     text-indent: -20px;
@@ -824,7 +823,7 @@ body {
                 padding-right: 0.5em;
                 position: absolute;
                 top: -45px;
-                left: 86px;
+                left: 84px;
             }
             .previewIcon {
                 display: none;
