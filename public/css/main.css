@@ -544,6 +544,7 @@ body {
   display: none; }
 
 .container-fluid-choose-logo .row-choose-logo .col-lg-3.col-md-3.col-sm-3.col-xs-12 {
+  border: 1px solid #eaeaea;
   position: relative;
   height: 360px;
   overflow: hidden;
@@ -635,7 +636,7 @@ body {
   z-index: 1; }
   .container-fluid-choose-logo .row-choose-logo .col-lg-3.col-md-3.col-sm-3.col-xs-12:hover .btn-show-hide {
     display: block;
-    bottom: 0;
+    bottom: 15px;
     position: absolute;
     padding: 0;
     width: 100%;

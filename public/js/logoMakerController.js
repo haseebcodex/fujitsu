@@ -1,14 +1,82 @@
 angular.module('logomaker.controllers', ['colorpicker.module']).controller('logoMakerController', function ($scope, $window, $http) {
 
     $scope.fontFamilies = [
-        { id : 0, name : 'Eczar' },
-        { id : 1, name : 'Hanalei Fill' },
-        { id : 2, name : 'Indie Flower' },
-        { id : 3, name : 'Josefin Sans' },
-        { id : 4, name : 'Kirang Haerang' },
-        { id : 5, name : 'Modern Antiqua' },
-        { id : 6, name : 'Montserrat' },
-        { id : 7, name : 'Sunflower' }
+        { name : '"Gamja Flower", cursive' },
+        { name : '"Montserrat", sans-serif' },
+        { name : '"Lato", sans-serif' },
+        { name : '"Mukta", sans-serif' },
+        { name : '"Oswald", sans-serif' },
+        { name : '"Merriweather", serif' },
+        { name : '"Ubuntu", sans-serif' },
+        { name : '"Baloo Tammudu", cursive' },
+        { name : '"Chango", cursive' },
+        { name : '"Roboto Mono", monospace' },
+        { name : '"Indie Flower", cursive' },
+        { name : '"Anton", sans-serif' },
+        { name : '"Quicksand", sans-serif' },
+        { name : '"Lobster", cursive' },
+        { name : '"Fjalla One", sans-serif' },
+        { name : '"Pacifico", cursive' },
+        { name : '"Source Code Pro", monospace' },
+        { name : '"Bree Serif", serif' },
+        { name : '"Acme", sans-serif' },
+        { name : '"Abril Fatface", cursive' },
+        { name : '"Comfortaa", cursive' },
+        { name : '"Gloria Hallelujah", cursive' },
+        { name : '"Patua One", cursive' },
+        { name : '"Permanent Marker", cursive' },
+        { name : '"Cuprum", sans-serif' },
+        { name : '"Satisfy", cursive' },
+        { name : '"Kaushan Script", cursive' },
+        { name : '"Jua", sans-serif' },
+        { name : '"Cookie", cursive' },
+        { name : '"Quattrocento Sans", sans-serif' },
+        { name : '"Orbitron", sans-serif' },
+        { name : '"Lobster Two", cursive' },
+        { name : '"Monoton", cursive' },
+        { name : '"Fredoka One", cursive' },
+        { name : '"Caveat", cursive' },
+        { name : '"Archivo Black", sans-serif' },
+        { name : '"Luckiest Guy", cursive' },
+        { name : '"Pontano Sans", sans-serif' },
+        { name : '"Alfa Slab One", cursive' },
+        { name : '"Kalam", cursive' },
+        { name : '"Sacramento", cursive' },
+        { name : '"Passion One", cursive' },
+        { name : '"Patrick Hand", cursive' },
+        { name : '"Neucha", cursive' },
+        { name : '"Sigmar One", cursive' },
+        { name : '"Aldrich", sans-serif' },
+        { name : '"Merienda", cursive' },
+        { name : '"Ultra", serif' },
+        { name : '"Bad Script", cursive' },
+        { name : '"Marck Script", cursive' },
+        { name : '"Caveat Brush", cursive' },
+        { name : '"Advent Pro", sans-serif' },
+        { name : '"Rancho", cursive' },
+        { name : '"Bevan", cursive' },
+        { name : '"Fugaz One", cursive' },
+        { name : '"Chewy", cursive' },
+        { name : '"Nothing You Could Do", cursive' },
+        { name : '"Alegreya Sans SC", sans-serif' },
+        { name : '"Kirang Haerang", cursive' },
+        { name : '"IBM Plex Mono", monospace' },
+        { name : '"Fredericka the Great", cursive' },
+        { name : '"Gochi Hand", cursive' },
+        { name : '"Just Another Hand", cursive' },
+        { name : '"Reenie Beanie", cursive' },
+        { name : '"Knewave", cursive' },
+        { name : '"Jaldi", sans-serif' },
+        { name : '"Pridi", serif' },
+        { name : '"Carme", sans-serif' },
+        { name : '"Love Ya Like A Sister", cursive' },
+        { name : '"Contrail One", cursive' },
+        { name : '"Voltaire", sans-serif' },
+        { name : '"Martel Sans", sans-serif' },
+        { name : '"Cinzel Decorative", cursive' },
+        { name : '"Aclonica", sans-serif' },
+        { name : '"Annie Use Your Telescope", cursive' },
+        { name : '"Rammetto One", cursive' }
     ];
 
     $scope.logoName = JSON.parse(localStorage.getItem('selectedLogoName'));
@@ -82,6 +150,16 @@ angular.module('logomaker.controllers', ['colorpicker.module']).controller('logo
         document.onkeydown = $scope.keyPress;
 
     };
+
+    // $scope.checkFont = function(family, name){
+    //     if(name.replace(/'/g, '').replace(/"/g, '') == family.replace(/'/g, '').replace(/"/g, '')){
+    //         console.log(name);
+    //         return true;
+    //     }
+    //     else{
+    //         return false;
+    //     }
+    // };
 
     $scope.loadLogo = function() {
 
@@ -240,7 +318,7 @@ angular.module('logomaker.controllers', ['colorpicker.module']).controller('logo
         $('#svgIconHere svg path, #svgIconHere svg rect, #svgIconHere svg polygon, #svgIconHere svg circle, #svgIconHere svg ellipse').each(function(index){
             $(this).attr('id', 'vector_id_' + index).attr('pathid', index);
             var fillcolor = $(this).css('fill');
-            if(fillcolor.indexOf('linear-gradient')){
+            if(fillcolor.indexOf('linear-gradient') > -1){
                 fillcolor = '';
             }
             var path_here = { id : 'vector_id_' + index, fill : fillcolor };

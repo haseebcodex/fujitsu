@@ -14,6 +14,85 @@ angular.module('logos.controllers', []).controller('logosController', function($
     //     { id : 3, image : 'Eczar', transform: '0' }
     // ];
 
+    $scope.fontFamilies = [
+        { name : "'Gamja Flower', cursive" },
+        { name : "'Montserrat', sans-serif" },
+        { name : "'Lato', sans-serif" },
+        { name : "'Mukta', sans-serif" },
+        { name : "'Oswald', sans-serif" },
+        { name : "'Merriweather', serif" },
+        { name : "'Ubuntu', sans-serif" },
+        { name : "'Baloo Tammudu', cursive" },
+        { name : "'Chango', cursive" },
+        { name : "'Roboto Mono', monospace" },
+        { name : "'Indie Flower', cursive" },
+        { name : "'Anton', sans-serif" },
+        { name : "'Quicksand', sans-serif" },
+        { name : "'Lobster', cursive" },
+        { name : "'Fjalla One', sans-serif" },
+        { name : "'Pacifico', cursive" },
+        { name : "'Source Code Pro', monospace" },
+        { name : "'Bree Serif', serif" },
+        { name : "'Acme', sans-serif" },
+        { name : "'Abril Fatface', cursive" },
+        { name : "'Comfortaa', cursive" },
+        { name : "'Gloria Hallelujah', cursive" },
+        { name : "'Patua One', cursive" },
+        { name : "'Permanent Marker', cursive" },
+        { name : "'Cuprum', sans-serif" },
+        { name : "'Satisfy', cursive" },
+        { name : "'Kaushan Script', cursive" },
+        { name : "'Jua', sans-serif" },
+        { name : "'Cookie', cursive" },
+        { name : "'Quattrocento Sans', sans-serif" },
+        { name : "'Orbitron', sans-serif" },
+        { name : "'Lobster Two', cursive" },
+        { name : "'Monoton', cursive" },
+        { name : "'Fredoka One', cursive" },
+        { name : "'Caveat', cursive" },
+        { name : "'Archivo Black', sans-serif" },
+        { name : "'Luckiest Guy', cursive" },
+        { name : "'Pontano Sans', sans-serif" },
+        { name : "'Alfa Slab One', cursive" },
+        { name : "'Kalam', cursive" },
+        { name : "'Sacramento', cursive" },
+        { name : "'Passion One', cursive" },
+        { name : "'Patrick Hand', cursive" },
+        { name : "'Neucha', cursive" },
+        { name : "'Sigmar One', cursive" },
+        { name : "'Aldrich', sans-serif" },
+        { name : "'Merienda', cursive" },
+        { name : "'Ultra', serif" },
+        { name : "'Bad Script', cursive" },
+        { name : "'Marck Script', cursive" },
+        { name : "'Caveat Brush', cursive" },
+        { name : "'Advent Pro', sans-serif" },
+        { name : "'Rancho', cursive" },
+        { name : "'Bevan', cursive" },
+        { name : "'Fugaz One', cursive" },
+        { name : "'Chewy', cursive" },
+        { name : "'Nothing You Could Do', cursive" },
+        { name : "'Alegreya Sans SC', sans-serif" },
+        { name : "'Kirang Haerang', cursive" },
+        { name : "'IBM Plex Mono', monospace" },
+        { name : "'Fredericka the Great', cursive" },
+        { name : "'Gochi Hand', cursive" },
+        { name : "'Just Another Hand', cursive" },
+        { name : "'Reenie Beanie', cursive" },
+        { name : "'Knewave', cursive" },
+        { name : "'Jaldi', sans-serif" },
+        { name : "'Pridi', serif" },
+        { name : "'Carme', sans-serif" },
+        { name : "'Love Ya Like A Sister', cursive" },
+        { name : "'Contrail One', cursive" },
+        { name : "'Voltaire', sans-serif" },
+        { name : "'Martel Sans', sans-serif" },
+        { name : "'Cinzel Decorative', cursive" },
+        { name : "'Aclonica', sans-serif" },
+        { name : "'Annie Use Your Telescope', cursive" },
+        { name : "'Rammetto One', cursive" }
+    ];
+
     $scope.init = function() {
 
         if (!$scope.category || !$scope.company) {
@@ -75,6 +154,11 @@ angular.module('logos.controllers', []).controller('logosController', function($
         $('.onlyIconHere').css('display', 'none'); //display none the icon with svgs
 
         $('svg text').html($scope.company);
+        $('svg text').each(function(index){
+            var randomIndex = Math.floor(Math.random() * 75);
+            $(this).css('font-family', $scope.fontFamilies[randomIndex].name);
+            console.log($scope.fontFamilies[randomIndex].name, randomIndex);
+        });
         // $('svg text[id="sloganname"]').html($scope.slogan);
 
         $('.col-md-6 input[type="button"]').on('click', function() {
