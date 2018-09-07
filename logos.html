@@ -22,7 +22,13 @@
 
 <body ng-app="logomakerapp" class="logos editorBody" ng-controller="logosController" ng-init="init()" style="background: #fff;">
 
-    <nav class="navbar navbar-light bg-light">
+    
+    <div class="main-loader-container">
+        <p ng-repeat="text in loaderMessages" class="loaderHeading loaderHeading{{text.id + 1}}">{{text.message}}</p>
+        <div id="mainLoader"></div>
+    </div>
+
+    <nav class="navbar navbar-light bg-light" ng-show="!hideLogos">
         <a class="navbar-brand" href="#">
             <img src="https://www.logoskill.com/Images/favi.png" width="45" height="45" alt="">
         </a>
@@ -32,7 +38,7 @@
         </form>
     </nav>
 
-    <div style="margin-top: 68px;">
+    <div id="logosContainer" style="margin-top: 68px;" ng-show="!hideLogos">
 
         <!-- <div class="container-fluid custom-fluid">
             <h2>Company: {{company}}</h2>
@@ -67,6 +73,7 @@
 
 <script src="public/js/select2.js"></script>
 <script src="public/js/main.js"></script>
+<script src="public/js/progressbar.min.js"></script>
 <script src="public/js/fontawesome.min.js"></script>
 
 </html>

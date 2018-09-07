@@ -2,6 +2,10 @@ angular.module('logos.controllers', []).controller('logosController', function($
 
     $scope.category = localStorage.getItem('categoryname');
     $scope.company = localStorage.getItem('companyname');
+    $scope.email = localStorage.getItem('emailAddress');
+    $scope.hideLogos = true;
+    // $scope.loaderText;
+    $scope.loaderTime = 16000;
     // $scope.slogan = localStorage.getItem('sloganname');
     // $scope.namelist;
     // $scope.sloganlist;
@@ -93,13 +97,30 @@ angular.module('logos.controllers', []).controller('logosController', function($
         { name : "'Rammetto One', cursive" }
     ];
 
+    $scope.loaderMessages = [
+        {id: 0, message: "Analyzing Business String"},
+        {id: 1, message: "Searching Design Database"},
+        {id: 2, message: "Generating Icons"},
+        {id: 3, message: "Grading Design Quality"},
+        {id: 4, message: "Finalyzing Fonts & Styles"},
+        {id: 5, message: "Showcasing Designs"}
+    ];
+
     $scope.init = function() {
 
-        if (!$scope.category || !$scope.company) {
+        if (!$scope.category || !$scope.company || !$scope.email) {
             window.location.href = "start.html";
         } else {
             $scope.getSelectedSvgs($scope.category);
         }
+
+        setTimeout(function(){
+            // $scope.hideLogos = false;
+            $('.navbar.navbar-light').removeClass('ng-hide');
+            $('#logosContainer').removeClass('ng-hide');
+            $('.main-loader-container').css('display', 'none');
+        }, $scope.loaderTime);
+        $scope.progressbar('mainLoader', $scope.loaderTime);
 
     };
 
@@ -124,7 +145,7 @@ angular.module('logos.controllers', []).controller('logosController', function($
     };
 
     $scope.loadSvgs = function(data) {
-        console.log(data);
+        // console.log(data);
         // console.log(JSON.parse(data));
 
         for (var i = 0; i < data.length; i++) {
@@ -157,7 +178,7 @@ angular.module('logos.controllers', []).controller('logosController', function($
         $('svg text').each(function(index){
             var randomIndex = Math.floor(Math.random() * 75);
             $(this).css('font-family', $scope.fontFamilies[randomIndex].name);
-            console.log($scope.fontFamilies[randomIndex].name, randomIndex);
+            // console.log($scope.fontFamilies[randomIndex].name, randomIndex);
         });
         // $('svg text[id="sloganname"]').html($scope.slogan);
 
@@ -259,6 +280,40 @@ angular.module('logos.controllers', []).controller('logosController', function($
 
     $scope.changeCat = function() {
         $window.location.href = "start.html";
+    };
+
+
+    // progressbar.js@1.0.0 version is used
+    $scope.progressbar = function(elementId, duration){
+        $('#'+elementId).parent().show();
+        var bar = new ProgressBar.Line(mainLoader, {
+            strokeWidth: 1.8,
+            easing: 'easeInOut',
+            duration: duration,
+            color: '#41ac00',
+            trailColor: '#ccc',
+            trailWidth: 1,
+            svgStyle: {width: '100%', height: '100%'},
+            text: {
+                style: {
+                    // Text color.
+                    // Default: same as stroke color (options.color)
+                    color: '#000',
+                    position: 'absolute',
+                    right: '0',
+                    top: '20px',
+                    padding: 0,
+                    margin: 0,
+                    transform: null
+                },
+                autoStyleContainer: false
+            },
+            step: (state, bar) => {
+                bar.setText(Math.round(bar.value() * 100) + ' %');
+            }
+        });
+        
+        bar.animate(1.0);  // Number from 0.0 to 1.0
     };
 
 

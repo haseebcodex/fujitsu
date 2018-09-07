@@ -2,11 +2,15 @@ angular.module('getstarted.controllers', []).controller('getStartedController', 
 
     $scope.step = 1;
     $scope.companyName;
+    $scope.categoryName;
     $scope.requiredCompanyName = false;
     // $scope.sloganName;
     $scope.requiredSloganName = false;
     $scope.category;
     $scope.requiredCategory = false;
+    $scope.emailAddress;
+    $scope.requiredEmail = false;
+    $scope.requiredEmailMsg = "Valid Email Address is required.";
     // $scope.showCategoryLoader = false;
 
     $scope.categories = [];
@@ -56,8 +60,23 @@ angular.module('getstarted.controllers', []).controller('getStartedController', 
         } else {
             $scope.requiredCategory = false;
             localStorage.setItem('categoryname', $scope.category);
+            $scope.step = 3;
+        }
+    };
+
+    $scope.getStarted = function(){
+        if (!$scope.emailAddress) {
+            $scope.requiredEmail = true;
+        } else {
+            $scope.requiredEmail = false;
+            localStorage.setItem('emailAddress', $scope.emailAddress);
             window.location.href = "logos.html";
         }
+    };
+
+    $scope.validateEmail = function validateEmail(email) {
+        var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return re.test(String(email).toLowerCase());
     };
 
     $scope.getCategories = function() {
