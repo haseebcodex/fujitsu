@@ -512,9 +512,8 @@ angular.module('logomaker.controllers', ['colorpicker.module']).controller('logo
                 return data.text;
             }
         });
-        
         for(var i in $scope.fontFamilies){
-            if($scope.logoName.family == $scope.fontFamilies[i].title.replace(/'/g, '')){
+            if($scope.logoName.family.replace(/'/g, '').replace(/"/g, '') == $scope.fontFamilies[i].title.replace(/'/g, '').replace(/"/g, '')){
                 $('.select2.font').val(i-1).trigger('change.select2');
                 // console.log();
             }
