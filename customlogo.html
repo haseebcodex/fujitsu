@@ -74,10 +74,12 @@
                             </div>
                             <div class="col-md-6">
                                 <label for="logFamily">Font Family</label>
-                                <select class="form-control" ng-model="logoName.family" name="logFamily" ng-change="updateHistory()">
+                                <!-- <select class="form-control" ng-model="logoName.family" name="logFamily" ng-change="updateHistory()">
                                     <option value="{{logoName.family}}" selected>{{logoName.family}}</option>
                                     <option ng-repeat="family in fontFamilies" value="{{family.name}}" ng-selected="checkFont(logoName.family, family.name)">{{family.name}}</option>
-                                </select>
+                                </select> -->
+
+                                <select class="select2 font" name="logFamily"></select>
                             </div>
                         </div>
                         
@@ -119,9 +121,10 @@
                             </div>
                             <div class="col-md-6">
                                 <label for="textFamily">Text Family</label>
-                                <select class="form-control" ng-model="slogan.family" name="textFamily" ng-change="updateHistory()">
+                                <!-- <select class="form-control" ng-model="slogan.family" name="textFamily" ng-change="updateHistory()">
                                     <option ng-repeat="family in fontFamilies" value="{{family.name}}">{{family.name}}</option>
-                                </select>
+                                </select> -->
+                                <select class="select2 text" name="textFamily"></select>
                             </div>
                         </div>
 
