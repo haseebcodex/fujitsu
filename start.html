@@ -33,7 +33,7 @@
                     <div class="center-block nameSlogan slide-in-blurred-left-h1" ng-if="step > 2">
                         <h3 class="text-center" style="font-variant: petite-caps;">Category: <strong style="color: #8554fa">{{category}}</strong></h3>
                     </div>
-                    <div class="wrapper focus-in-contract-bck-input">
+                    <div class="wrapper focus-in-contract-bck-input div-flex" ng-show="step == 1">
 
                         <fieldset class="formRow">
                             <div class="formRow--item" ng-show="step == 1">
@@ -42,10 +42,15 @@
                                     
                                 </label>
                             </div>
+                            <div class="arrow-div">
+                                <input type="button" ng-if="step==1 " value="Next" ng-click="checkCompanyName() ">
+
+                                <span class="arrow "></span>
+                            </div>
                         </fieldset>
 
-                        <input type="button" ng-if="step == 1" value="Next" ng-click="checkCompanyName()">
-                        <span class="arrow"></span>
+                        <!-- <input type="button" ng-if="step == 1" value="Next" ng-click="checkCompanyName()">
+                        <span class="arrow"></span> -->
                     </div>
                     <span class="required_error text-center slide-in-blurred-left-h1" ng-if="requiredCompanyName">Company name is required.</span>
 
@@ -54,23 +59,27 @@
                         <select class="js-example-basic-multiple js-select2" name="states[]">
                             <option ng-repeat="cat in categories" value="{{cat.value}}">{{cat.value}}</option>
                         </select>
-                        <input class="center-block" type="button" value="Next" ng-click="checkCategories()">
-                        <span class="arrow-get-started"></span>
+                        <div class="arrow-div-2">
+                            <input class="center-block" type="button" value="Next" ng-click="checkCategories()">
+                            <span class="arrow-get-started"></span>
+                        </div>
                     </form>
                     <span class="required_error text-center" ng-if="requiredCategory">Category is required.</span>
 
-                    <div class="wrapper focus-in-contract-bck-input">
+                    <div class="wrapper focus-in-contract-bck-input" style="display:flex;">
 
-                        <fieldset class="formRow">
+                        <fieldset class="formRow m-0">
                             <div class="formRow--item" ng-show="step == 3">
                                 <label for="emailAddress" class="formRow--input-wrapper js-inputWrapper">
                                     <input type="email" class="formRow--input js-input" id="emailAddress" ng-model="emailAddress" placeholder="Email Address" required>
                                 </label>
                             </div>
+                            <div class="arrow-div-3">
+                                <input class="input3" type="button" ng-if="step == 3" value="Get Started" ng-click="getStarted()">
+                                <span class="arrow"></span>
+                            </div>
                         </fieldset>
 
-                        <input type="button" ng-if="step == 3" value="Get Started" ng-click="getStarted()">
-                        <!-- <span class="arrow"></span> -->
                     </div>
                     <span class="required_error text-center slide-in-blurred-left-h1" ng-if="requiredEmail">{{requiredEmailMsg}}</span>
 
