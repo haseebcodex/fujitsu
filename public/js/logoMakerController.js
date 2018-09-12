@@ -171,15 +171,15 @@ angular.module('logomaker.controllers', ['colorpicker.module']).controller('logo
         size : "35",
         color : "rgb(91, 237, 15)",
         position : {
-            left : "0px",
-            top : "0px"
+            left : "20px",
+            top : "20px"
         },
         rotate : {
             degree : '0deg',
             rad : '0rad'
         }
     };
-    $scope.background = "#eaeaea";
+    $scope.background = "#ffffff";
     $scope.editStep = -1;
     $scope.editHistory = [];
     $scope.completeLogo = {};
@@ -229,7 +229,7 @@ angular.module('logomaker.controllers', ['colorpicker.module']).controller('logo
       
         $scope.initSelect2();
         document.onkeydown = $scope.keyPress;
-        $scope.reserveUser();      
+        $scope.reserveUser();
 
     };
 
@@ -529,6 +529,19 @@ angular.module('logomaker.controllers', ['colorpicker.module']).controller('logo
             $scope.slogan.family = data.title.replace(/"/g, '').replace(/'/g, '');
             $('#sloganNameHere').css('font-family', $scope.slogan.family);
         });
+
+        setTimeout(function(){
+            var fontWidth = parseInt($('#logoNameHere').css('width')),
+            fontLeftValue = 390 - parseInt(fontWidth/2);
+            $('#logoNameHere').css('left', fontLeftValue + 'px');
+            $scope.logoName.position.left = fontLeftValue + 'px';
+
+            var iconWidth = parseInt($('#svgIconHere').css('width')),
+            iconLeftValue = 390 - parseInt(iconWidth/2);
+            $('#svgIconHere').css('left', iconLeftValue + 'px');
+            $scope.svg.position.left = iconLeftValue + 'px';
+        }, 50);
+
     };
 
     $scope.changeLogo = function(){
