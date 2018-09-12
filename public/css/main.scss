@@ -179,7 +179,7 @@ body {
                 margin-top: 20vh;
                 font-weight: 700;
             }
-            div {
+            .div-flex {
                 display: flex;
             }
             .nameSlogan {
@@ -224,10 +224,27 @@ body {
                 opacity: 1;
                 animation: animateLefttt 0.8s;
             }
-            .arrow {
+            .arrow-div {
+                display: block;
                 position: absolute;
-                top: 10px;
-                left: 1200px;
+                top: 0px;
+                width: 140px;
+                height: 50px;
+                left: 400px;
+            }
+            .arrow-div-2 {
+                position: absolute;
+                width: 100%;
+                display: inline-flex;
+            }
+            .arrow-div-3 {
+                position: absolute;
+                top: 0;
+                left: 400px;
+                width: 210px;
+            }
+            .arrow {
+                position: relative;
                 transition: all .5s linear;
             }
             .arrow::after {
@@ -239,18 +256,16 @@ body {
                 color: $Color;
                 opacity: 0;
                 font-size: 20px;
-                padding-right: 0.5em;
-                position: absolute;
+                position: relative;
             }
             input[type="button"]:hover~.arrow-get-started::after {
                 opacity: 1;
                 animation: animateLeftttG 0.8s;
             }
             .arrow-get-started {
-                position: absolute;
-                top: 82px;
-                left: 957px;
+                position: relative;
                 transition: all .5s ease-in-out;
+                left: -6px;
             }
             .arrow-get-started::after {
                 content: "\00bb";
@@ -262,7 +277,8 @@ body {
                 opacity: 0;
                 font-size: 20px;
                 padding-right: 0.5em;
-                position: absolute;
+                position: relative;
+                top: 20%;
             }
             .watch-video {
                 display: flex;
@@ -347,6 +363,7 @@ body {
     }
     position: relative;
     margin-left: auto;
+    margin-right: auto;
     &--item {
         display: block;
     }
@@ -391,7 +408,7 @@ body {
             .formRow--input {
                 &:focus,
                 &:hover {
-                    border-color: $a-hover-Color;
+                    border-color: $Color;
                 }
             }
         }

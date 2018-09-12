@@ -544,6 +544,23 @@ angular.module('logomaker.controllers', ['colorpicker.module']).controller('logo
         };
 
         console.log($scope.completeLogo);
+
+        $.ajax({
+            type: 'POST',
+            url: '../../../check_out.php',
+            dataType: "json",
+            data: { data: JSON.stringify($scope.completeLogo) },
+            success: function(data) {
+                //window.location.href = "../../../check_out.php";
+            },
+            error: function(error) {
+                console.log(error.responseText);
+                if(error.responseText == "success"){
+                    window.location.href = "../../../check_out.php";
+                }
+            }
+        });
+        
     };
 
 });

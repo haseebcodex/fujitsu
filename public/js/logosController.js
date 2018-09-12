@@ -202,7 +202,7 @@ angular.module('logos.controllers', []).controller('logosController', function($
         $('svg text').html($scope.company);
         $('svg text').each(function(index){
             var randomIndex = Math.floor(Math.random() * 75);
-            $(this).css('font-family', $scope.fontFamilies[randomIndex].name);
+            $(this).css({'font-family': $scope.fontFamilies[randomIndex].name, 'font-size': '64px'});
             // console.log($scope.fontFamilies[randomIndex].name, randomIndex);
         });
         // $('svg text[id="sloganname"]').html($scope.slogan);

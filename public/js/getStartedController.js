@@ -2,6 +2,12 @@ angular.module('getstarted.controllers', []).controller('getStartedController', 
 
     $scope.step = 1;
     $scope.companyName;
+    if (localStorage.getItem("busineesNameHere")) {
+        $scope.companyName = localStorage.getItem("busineesNameHere");
+    }
+    else{
+        $scope.companyName = '';
+    }
     $scope.categoryName;
     $scope.requiredCompanyName = false;
     // $scope.sloganName;
@@ -17,6 +23,10 @@ angular.module('getstarted.controllers', []).controller('getStartedController', 
 
     $scope.init = function() {
         $scope.getCategories();
+
+        if ($scope.companyName != '') {
+            $('#companyname').focus();
+        }
     };
 
     $scope.checkCompanyName = function() {
