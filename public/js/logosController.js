@@ -5,7 +5,23 @@ angular.module('logos.controllers', []).controller('logosController', function($
     $scope.email = localStorage.getItem('emailAddress');
     $scope.hideLogos = true;
     // $scope.loaderText;
-    $scope.loaderTime = 16000;
+    $scope.loaderTime = 160;
+    $scope.fontSize;
+    if($scope.company.length <= 18){
+        $scope.fontSize = 60;
+    }
+    else if($scope.company.length > 18 && $scope.company.length <= 24){
+        $scope.fontSize = 50;
+    }
+    else if($scope.company.length > 24 && $scope.company.length <= 30){
+        $scope.fontSize = 40;
+    }
+    else if($scope.company.length > 30 && $scope.company.length <= 36){
+        $scope.fontSize = 30;
+    }
+    else{
+        $scope.fontSize = 12;
+    }
     // $scope.slogan = localStorage.getItem('sloganname');
     // $scope.namelist;
     // $scope.sloganlist;
@@ -202,7 +218,7 @@ angular.module('logos.controllers', []).controller('logosController', function($
         $('svg text').html($scope.company);
         $('svg text').each(function(index){
             var randomIndex = Math.floor(Math.random() * 75);
-            $(this).css({'font-family': $scope.fontFamilies[randomIndex].name, 'font-size': '64px'});
+            $(this).css({'font-family': $scope.fontFamilies[randomIndex].name, 'font-size': $scope.fontSize+'px'});
             // console.log($scope.fontFamilies[randomIndex].name, randomIndex);
         });
         // $('svg text[id="sloganname"]').html($scope.slogan);

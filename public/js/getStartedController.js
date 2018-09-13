@@ -25,7 +25,14 @@ angular.module('getstarted.controllers', []).controller('getStartedController', 
         $scope.getCategories();
 
         if ($scope.companyName != '') {
-            $('#companyname').focus();
+            // $('#companyname').focus();
+            // $scope.getCategories();
+            setTimeout(function(){
+                $('#companyname').focus();
+                $scope.checkCompanyName();
+                $('#companyname').blur();
+            }, 100);
+            // $scope.checkCompanyName();
         }
     };
 
