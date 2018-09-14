@@ -171,8 +171,8 @@ angular.module('logomaker.controllers', ['colorpicker.module']).controller('logo
         size : "35",
         color : "rgb(91, 237, 15)",
         position : {
-            left : "20px",
-            top : "20px"
+            left : "288px",
+            top : "550px"
         },
         rotate : {
             degree : '0deg',
@@ -546,6 +546,9 @@ angular.module('logomaker.controllers', ['colorpicker.module']).controller('logo
 
     $scope.changeLogo = function(){
         $window.location.href = "logos.html"
+    };
+    $scope.resetLogo = function(){
+        $window.location.reload();
     };
     
     $scope.finish = function(){

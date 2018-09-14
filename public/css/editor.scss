@@ -57,6 +57,7 @@ body{
                 .col-md-4{
                     background: #fff;
                     overflow: auto;
+                    z-index: 1;
                 }
             }
 
@@ -193,6 +194,7 @@ body{
 
                 &.colorPickerHere{
                     padding-right: 46px;
+                    cursor: pointer;
                 }
             }
 
@@ -204,6 +206,7 @@ body{
                 top: -34px;
                 right: 8px;
                 border-radius: 50%;
+                z-index: -1;
             }
 
             input[type=range] {

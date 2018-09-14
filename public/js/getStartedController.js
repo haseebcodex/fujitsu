@@ -28,9 +28,10 @@ angular.module('getstarted.controllers', []).controller('getStartedController', 
             // $('#companyname').focus();
             // $scope.getCategories();
             setTimeout(function(){
-                $('#companyname').focus();
-                $scope.checkCompanyName();
-                $('#companyname').blur();
+                // $('#companyname').focus();
+                // $scope.checkCompanyName();
+                // $('#companyname').blur();
+                $('#companyNameNext').trigger('click');
             }, 100);
             // $scope.checkCompanyName();
         }

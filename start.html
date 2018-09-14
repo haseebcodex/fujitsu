@@ -4,6 +4,8 @@
 <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Business Name & Category</title>
+    <link rel="icon" href="https://www.logoskill.com/Images/favi.png" type="image/gif" sizes="16x16">
 
     <link rel="stylesheet" type="text/css" href="public/jquery-ui-1.12.1.custom/jquery-ui.min.css">
     <link rel="stylesheet" type="text/css" href="public/css/colorpicker.css">
@@ -24,6 +26,9 @@
         <div class="container-fluid custom-fluid">
 
             <div class="row custom-fluid-row">
+                <a class="navbar-brand" href="https://www.logoskill.com">
+                    <img src="https://www.logoskill.com/Images/favi.png" width="45" height="45" alt="">
+                </a>
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 custom-fluid-row-col">
                     <h1 class="text-center slide-in-blurred-left-h1">Make a logo you'll be proud of.</h1>
                     <p class="text-center p-tagline slide-in-blurred-right-p">Use our logo maker to instantly create stunning logo designs for your business.</p>
@@ -43,7 +48,7 @@
                                 </label>
                             </div>
                             <div class="arrow-div">
-                                <input type="button" ng-if="step==1 " value="Next" ng-click="checkCompanyName() ">
+                                <input type="button" ng-if="step==1 " value="Next" ng-click="checkCompanyName()" id="companyNameNext">
 
                                 <span class="arrow "></span>
                             </div>
@@ -83,12 +88,12 @@
                     </div>
                     <span class="required_error text-center slide-in-blurred-left-h1" ng-if="requiredEmail">{{requiredEmailMsg}}</span>
 
-                    <div class="watch-video slide-in-bottom-video">
+                    <!-- <div class="watch-video slide-in-bottom-video">
                         <i class="fab fa-youtube"></i>
                         <a href="">
                             <p>Watch the video</p>
                         </a>
-                    </div>
+                    </div> -->
                 </div>
             </div>
 

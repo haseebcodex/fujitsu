@@ -3,6 +3,8 @@
 <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>Customize your logo</title>
+    <link rel="icon" href="https://www.logoskill.com/Images/favi.png" type="image/gif" sizes="16x16">
 
     <link rel="stylesheet" type="text/css" href="public/jquery-ui-1.12.1.custom/jquery-ui.min.css">
     <link rel="stylesheet" type="text/css" href="public/css/colorpicker.css">
@@ -24,11 +26,12 @@
 <body class="editorBody" ng-app="logomakerapp" ng-controller="logoMakerController" ng-init="init()">
 
     <nav class="navbar navbar-light bg-light">
-        <a class="navbar-brand" href="#">
+        <a class="navbar-brand" href="https://www.logoskill.com">
             <img src="https://www.logoskill.com/Images/favi.png" width="45" height="45" alt="">
         </a>
         
         <form class="form-inline pull-right navbar-buttons">
+            <button class="btn btn-lg black" type="button" ng-click="resetLogo()">Reset</button>
             <button class="btn btn-lg black" type="button" ng-click="changeLogo()">Change Logo</button>
             <button class="btn btn-lg" type="button" ng-click="finish()">Finish & Order</button>
         </form>

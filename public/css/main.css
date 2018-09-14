@@ -623,6 +623,7 @@ body {
   .container-fluid-choose-logo .row-choose-logo .col-lg-3.col-md-3.col-sm-3.col-xs-12:hover .previewIcon {
     display: block; }
   .container-fluid-choose-logo .row-choose-logo .col-lg-3.col-md-3.col-sm-3.col-xs-12 svg {
+    width: 100%;
     max-width: 340px;
     height: 340px;
     position: relative;
@@ -970,7 +971,8 @@ body.editorBody {
       height: calc(100vh - 68px); }
     body.editorBody .main-container .row .col-md-4 {
       background: #fff;
-      overflow: auto; }
+      overflow: auto;
+      z-index: 1; }
   body.editorBody #draggableParent {
     width: calc(800px - 10px);
     height: calc(800px - 10px);
@@ -1037,7 +1039,8 @@ body.editorBody {
       border-bottom: 1px #188fca solid; }
     body.editorBody .togglePanel input.form-control.colorPickerHere,
     body.editorBody .togglePanel select.form-control.colorPickerHere {
-      padding-right: 46px; }
+      padding-right: 46px;
+      cursor: pointer; }
   body.editorBody .togglePanel .colorBox {
     float: right;
     position: relative;
@@ -1045,7 +1048,8 @@ body.editorBody {
     height: 26px;
     top: -34px;
     right: 8px;
-    border-radius: 50%; }
+    border-radius: 50%;
+    z-index: -1; }
   body.editorBody .togglePanel input[type=range] {
     -webkit-appearance: none;
     margin: 18px 0;
