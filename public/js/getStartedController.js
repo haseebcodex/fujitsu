@@ -23,17 +23,8 @@ angular.module('getstarted.controllers', []).controller('getStartedController', 
 
     $scope.init = function() {
         $scope.getCategories();
-
-        if ($scope.companyName != '') {
-            // $('#companyname').focus();
-            // $scope.getCategories();
-            setTimeout(function(){
-                // $('#companyname').focus();
-                // $scope.checkCompanyName();
-                // $('#companyname').blur();
-                $('#companyNameNext').trigger('click');
-            }, 100);
-            // $scope.checkCompanyName();
+        if($scope.companyName != ''){
+            $scope.checkCompanyName();
         }
     };
 
@@ -46,20 +37,7 @@ angular.module('getstarted.controllers', []).controller('getStartedController', 
             $scope.step = 2;
 
             $('#anim1').addClass('slide-in-blurred-right-p'); // add animation class to the fields
-
-            // init the select2 dropdown for categories
-            $('.js-example-basic-multiple').select2({
-                placeholder: "Select"
-            });
-
-            $(".js-select2").select2({
-                placeholder: "Choose Category",
-                theme: "material"
-            });
-
-            $(".select2-selection__arrow")
-                .addClass("material-icons")
-                .html("arrow_drop_down");
+            
         }
     };
 
@@ -108,7 +86,20 @@ angular.module('getstarted.controllers', []).controller('getStartedController', 
                 for (var i = 0; i < data[1].length; i++) {
                     var item = { id: i, value: data[1][i] };
                     $scope.categories[i] = item;
+                    var optionHtml = '<option value="'+ $scope.categories[i].value +'">'+ $scope.categories[i].value +'</option>';
+                    $(".js-select2").append(optionHtml);
                 }
+
+                // init the select2 dropdown for categories
+                $(".js-select2").select2({
+                    placeholder: "Choose Category",
+                    theme: "material"
+                });
+
+                $(".select2-selection__arrow")
+                    .addClass("material-icons")
+                    .html("arrow_drop_down");
+
             },
             error: function(error) {
                 console.log(error);
